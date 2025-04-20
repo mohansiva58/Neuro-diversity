@@ -1,0 +1,275 @@
+
+  :root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --contrast: 1;
+    --font-size: 16px;
+    --animation-speed: 1;
+    --primary-color: #000000; /* Primary black color */
+    --secondary-color: #333333; /* Secondary darker black */
+    --accent-color: #000000; /* Accent black color */
+    --card-bg: #f0f0f0; /* Light gray for cards */
+    --card-border: #dddddd; /* Light gray for card borders */
+  }
+
+  [data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --primary-color: #ffffff; /* Primary white color */
+    --secondary-color: #cccccc; /* Secondary lighter white */
+    --accent-color: #ffffff; /* Accent white color */
+    --card-bg: #333333; /* Dark gray for dark mode cards */
+    --card-border: #555555; /* Darker gray for dark mode card borders */
+  }
+
+  [data-contrast="high"] {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --primary-color: #ffffff;
+    --secondary-color: #cccccc;
+    --accent-color: #ffffff;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: var(--font-size);
+    line-height: 1.5;
+    transition: background 0.3s, color 0.3s;
+    animation-duration: calc(0.3s * var(--animation-speed));
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--secondary-color);
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    flex-wrap: wrap; /* Enable wrapping for smaller screens */
+    justify-content: center; /* Center items on smaller screens */
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px; /* Add some padding for better touch targets */
+    border-radius: 5px; /* Optional: add a slight rounded border */
+  }
+
+  nav a:hover {
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+  }
+
+  nav img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(100%) contrast(var(--contrast)); /* Adjust icon color */
+  }
+
+  .settings-panel {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: var(--bg-color);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    overflow-y: auto; /* Enable scrolling if content overflows */
+  }
+
+  .settings-panel.active {
+    display: block;
+  }
+
+  .settings-panel label {
+    display: block;
+    margin: 10px 0 5px;
+    color: var(--text-color);
+  }
+
+  .communication-board,
+  .emotion-tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .card,
+  .emotion-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform calc(0.2s * var(--animation-speed));
+  }
+
+  .card:hover,
+  .emotion-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow on hover */
+  }
+
+  .card img,
+  .emotion-card img {
+    width: 60px;
+    height: 60px;
+    filter: brightness(100%) contrast(var(--contrast)); /* Adjust icon color */
+  }
+
+  .sentence-builder,
+  .visual-schedule,
+  .skill-assessment,
+  .learning-path,
+  .gamified-module,
+  .intervention-guides,
+  .community-forum,
+  .printable-guides,
+  .sensory-game,
+  .rewards-system,
+  .social-stories,
+  .calming-activities {
+    margin: 20px 0;
+    padding: 15px; /* Increased padding for better readability */
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    background-color: var(--card-bg); /* Use card background for consistency */
+  }
+
+  .sentence-output {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+  }
+
+  button {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary-color);
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 8px;
+    margin: 5px 0;
+    width: 100%;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+  }
+
+  canvas {
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: var(--bg-color); /* Ensure canvas background matches theme */
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    nav ul {
+      flex-direction: row; /* Keep nav horizontal on slightly smaller screens */
+      justify-content: flex-start; /* Align nav to the start */
+      overflow-x: auto; /* Enable horizontal scrolling for nav */
+      padding-bottom: 10px; /* Add some space below the scrollable nav */
+    }
+
+    nav li {
+      flex-shrink: 0; /* Prevent nav items from shrinking */
+    }
+
+    .settings-panel {
+      width: 100%;
+    }
+
+    .communication-board,
+    .emotion-tools {
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+  }
+
+  @media (max-width: 480px) {
+    nav ul {
+      flex-direction: column; /* Stack nav items on very small screens */
+      align-items: flex-start;
+    }
+
+    nav a {
+      font-size: 1rem;
+    }
+
+    .communication-board,
+    .emotion-tools {
+      grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    }
+
+    .card img,
+    .emotion-card img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* WCAG AAA Compliance */
+  a:focus,
+  button:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+
+  /* Animation Toggle */
+  [data-animations="off"] .card,
+  [data-animations="off"] .emotion-card {
+    transition: none;
+  }
