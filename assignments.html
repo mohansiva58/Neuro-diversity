@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-translate="assignments_title">Assignments - NeuroStars</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+        --primary: black;
+        --secondary: #333;
+        --accent: black;
+        --background: white;
+        --text: black;
+        --card-bg: white;
+        --shadow: rgba(0, 0, 0, 0.1);
+        --nav-bg: white;
+    }
+
+    .dark-mode {
+        --primary: white;
+        --secondary: #ccc;
+        --accent: white;
+        --background: black;
+        --text: white;
+        --card-bg: #111;
+        --shadow: rgba(255, 255, 255, 0.1);
+        --nav-bg: #222;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background);
+        color: var(--text);
+        line-height: 1.6;
+    }
+
+    header {
+        background: var(--primary);
+        color: var(--background);
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px var(--shadow);
+    }
+
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .logo-icon {
+        font-size: 2rem;
+    }
+
+    .controls {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .btn {
+        background-color: var(--background);
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        box-shadow: 0 2px 5px var(--shadow);
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background-color: var(--primary);
+        color: var(--background);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    #dark-mode-toggle {
+        background-color: transparent;
+        border: none;
+        color: var(--background);
+        cursor: pointer;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    #dark-mode-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    nav {
+        background-color: var(--nav-bg);
+        color: var(--text);
+        padding: 0.75rem 0;
+        box-shadow: 0 2px 5px var(--shadow);
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        background-color: var(--primary);
+        color: var(--background);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
+
+    .page-header p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .assignment-section {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 3rem;
+        box-shadow: 0 5px 15px var(--shadow);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .assignment-section h2 {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .answers {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .answer-btn {
+        background-color: var(--background);
+        color: var(--primary);
+        border: 2px solid var(--primary);
+        padding: 0.75rem 1.5rem;
+        font-size: 1.2rem;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+        text-align: center;
+    }
+
+    .answer-btn:hover {
+        background-color: var(--primary);
+        color: var(--background);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    #feedback {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin: 1rem 0;
+        text-align: center;
+        min-height: 2rem;
+    }
+
+    #feedback.correct {
+        color: green;
+    }
+
+    #feedback.incorrect {
+        color: red;
+    }
+
+    #stars {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        text-align: center;
+    }
+
+    .next-btn {
+        display: block;
+        margin: 1.5rem auto 0;
+        padding: 0.75rem 2rem;
+        font-size: 1.2rem;
+        background-color: var(--background);
+        color: var(--primary);
+        border: 2px solid var(--primary);
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .next-btn:hover {
+        background-color: var(--primary);
+        color: var(--background);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    .language-selector {
+        position: relative;
+    }
+
+    .language-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: var(--background);
+        color: var(--text);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px var(--shadow);
+        padding: 0.5rem;
+        min-width: 120px;
+        z-index: 200;
+        display: none;
+    }
+
+    .language-dropdown.active {
+        display: block;
+    }
+
+    .language-option {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.2s ease;
+    }
+
+    .language-option:hover {
+        background-color: var(--primary);
+        color: var(--background);
+    }
+
+    footer {
+        background-color: var(--nav-bg);
+        color: var(--text);
+        padding: 3rem 0;
+        margin-top: 3rem;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .footer-column h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 0.5rem;
+    }
+
+    .footer-column ul {
+        list-style: none;
+    }
+
+    .footer-column ul li {
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-column a {
+        color: var(--text);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+        color: var(--accent);
+    }
+
+    .copyright {
+        text-align: center;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
+    }
+
+    .dark-mode .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .controls {
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+        }
+
+        .assignment-section h2 {
+            font-size: 1.5rem;
+        }
+
+        .answer-btn {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            min-width: 100px;
+        }
+
+        #feedback,
+        #stars {
+            font-size: 1.2rem;
+        }
+
+        .next-btn {
+            font-size: 1rem;
+            padding: 0.5rem 1.5rem;
+        }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+        <div class="logo">
+            <span class="logo-icon">✨</span>
+            <span data-translate="neurostars">NeuroStars</span>
+        </div>
+        <div class="controls">
+            <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
+            <div class="language-selector">
+                <button class="btn" id="language-btn">
+                    <span id="current-language">English</span>
+                    <span>▼</span>
+                </button>
+                <div class="language-dropdown" id="language-dropdown">
+                    <div class="language-option" data-lang="english">English</div>
+                    <div class="language-option" data-lang="hindi">हिंदी</div>
+                    <div class="language-option" data-lang="telugu">తెలుగు</div>
+                </div>
+            </div>
+            <a href="login.html" class="btn" data-translate="login_register">Login / Register</a>
+        </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+        <ul class="nav-links">
+            <li><a href="index.html" data-translate="home">Home</a></li>
+            <li><a href="games.html" data-translate="games">Games</a></li>
+            <li><a href="learning.html" data-translate="learning">Learning</a></li>
+            <li><a href="assignments.html" class="active" data-translate="assignments">Assignments</a></li>
+            <li><a href="resources.html" data-translate="resources">Resources</a></li>
+            <li><a href="community.html" data-translate="community">Community</a></li>
+        </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="page-header">
+        <h1 data-translate="assignments">Assignments</h1>
+        <p data-translate="assignments_desc">Practice and learn with fun, interactive assignments designed for neurodivergent children.</p>
+    </section>
+
+    <section class="assignment-section">
+        <h2 id="question" data-translate="loading_assignment">Loading assignment...</h2>
+        <div class="answers" id="answers"></div>
+        <p id="feedback"></p>
+        <p id="stars">⭐ <span data-translate="stars">Stars</span>: 0</p>
+        <button class="next-btn" onclick="loadNextAssignment()" data-translate="next_assignment">Next Assignment</button>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-translate="neurostars">NeuroStars</h3>
+            <ul>
+                <li><a href="about.html" data-translate="about_us">About Us</a></li>
+                <li><a href="about.html#mission" data-translate="our_mission">Our Mission</a></li>
+                <li><a href="contact.html" data-translate="contact">Contact</a></li>
+                <li><a href="support.html" data-translate="support">Support</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3 data-translate="resources">Resources</h3>
+            <ul>
+                <li><a href="resources.html#parents" data-translate="for_parents">For Parents</a></li>
+                <li><a href="resources.html#educators" data-translate="for_educators">For Educators</a></li>
+                <li><a href="resources.html#research" data-translate="research">Research</a></li>
+                <li><a href="blog.html" data-translate="blog">Blog</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3 data-translate="activities">Activities</h3>
+            <ul>
+                <li><a href="games.html" data-translate="games">Games</a></li>
+                <li><a href="learning.html" data-translate="learning_modules">Learning Modules</a></li>
+                <li><a href="assignments.html" data-translate="assignments">Assignments</a></li>
+                <li><a href="tools.html" data-translate="communication_tools">Communication Tools</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3 data-translate="connect">Connect</h3>
+            <ul>
+                <li><a href="community.html" data-translate="community_forum">Community Forum</a></li>
+                <li><a href="events.html" data-translate="events">Events</a></li>
+                <li><a href="newsletter.html" data-translate="newsletter">Newsletter</a></li>
+                <li><a href="feedback.html" data-translate="feedback">Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p data-translate="copyright">© 2025 NeuroStars. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Language translations
+    const translations = {
+        english: {
+            assignments_title: "Assignments - NeuroStars",
+            neurostars: "NeuroStars",
+            login_register: "Login / Register",
+            home: "Home",
+            games: "Games",
+            learning: "Learning",
+            assignments: "Assignments",
+            resources: "Resources",
+            community: "Community",
+            assignments_desc: "Practice and learn with fun, interactive assignments designed for neurodivergent children.",
+            loading_assignment: "Loading assignment...",
+            stars: "Stars",
+            next_assignment: "Next Assignment",
+            correct_feedback: "✅ Correct! Great job!",
+            incorrect_feedback: "❌ Try again!",
+            all_done: "🎉 All done! You're a star!",
+            about_us: "About Us",
+            our_mission: "Our Mission",
+            contact: "Contact",
+            support: "Support",
+            for_parents: "For Parents",
+            for_educators: "For Educators",
+            research: "Research",
+            blog: "Blog",
+            activities: "Activities",
+            learning_modules: "Learning Modules",
+            communication_tools: "Communication Tools",
+            connect: "Connect",
+            community_forum: "Community Forum",
+            events: "Events",
+            newsletter: "Newsletter",
+            feedback: "Feedback",
+            copyright: "© 2025 NeuroStars. All rights reserved.",
+            // Assignment-specific translations
+            question_1: "What color is the sky?",
+            question_1_options: ["green", "blue", "red"],
+            question_1_correct: "blue",
+            question_2: "What sound does a cat make?",
+            question_2_options: ["woof", "meow", "moo"],
+            question_2_correct: "meow",
+            question_3: "Which one is a fruit?",
+            question_3_options: ["apple", "car", "chair"],
+            question_3_correct: "apple",
+            question_4: "What shape has 3 sides?",
+            question_4_options: ["circle", "square", "triangle"],
+            question_4_correct: "triangle",
+            question_5: "Which one can fly?",
+            question_5_options: ["cat", "dog", "bird"],
+            question_5_correct: "bird",
+            question_6: "What do you wear on your feet?",
+            question_6_options: ["hat", "shoes", "gloves"],
+            question_6_correct: "shoes"
+        },
+        hindi: {
+            assignments_title: "असाइनमेंट - न्यूरोस्टार्स",
+            neurostars: "न्यूरोस्टार्स",
+            login_register: "लॉगिन / रजिस्टर",
+            home: "होम",
+            games: "गेम्स",
+            learning: "शिक्षा",
+            assignments: "असाइनमेंट",
+            resources: "संसाधन",
+            community: "समुदाय",
+            assignments_desc: "न्यूरोडायवर्जेंट बच्चों के लिए डिज़ाइन किए गए मजेदार, इंटरैक्टिव असाइनमेंट के साथ अभ्यास करें और सीखें।",
+            loading_assignment: "असाइनमेंट लोड हो रहा है...",
+            stars: "तारे",
+            next_assignment: "अगला असाइनमेंट",
+            correct_feedback: "✅ सही! शानदार काम!",
+            incorrect_feedback: "❌ फिर से कोशिश करें!",
+            all_done: "🎉 सब हो गया! आप एक स्टार हैं!",
+            about_us: "हमारे बारे में",
+            our_mission: "हमारा मिशन",
+            contact: "संपर्क",
+            support: "समर्थन",
+            for_parents: "माता-पिता के लिए",
+            for_educators: "शिक्षकों के लिए",
+            research: "अनुसंधान",
+            blog: "ब्लॉग",
+            activities: "गतिविधियाँ",
+            learning_modules: "शिक्षा मॉड्यूल",
+            communication_tools: "संचार उपकरण",
+            connect: "जुड़ें",
+            community_forum: "समुदाय मंच",
+            events: "आयोजन",
+            newsletter: "न्यूज़लेटर",
+            feedback: "प्रतिक्रिया",
+            copyright: "© 2025 न्यूरोस्टार्स। सर्वाधिकार सुरक्षित।",
+            // Assignment-specific translations
+            question_1: "आसमान का रंग क्या है?",
+            question_1_options: ["हरा", "नीला", "लाल"],
+            question_1_correct: "नीला",
+            question_2: "बिल्ली की आवाज़ क्या है?",
+            question_2_options: ["भौंक", "म्याऊं", "मूं"],
+            question_2_correct: "म्याऊं",
+            question_3: "इनमें से कौन सा फल है?",
+            question_3_options: ["सेब", "कार", "कुर्सी"],
+            question_3_correct: "सेब",
+            question_4: "किस आकृति की तीन भुजाएँ होती हैं?",
+            question_4_options: ["वृत्त", "वर्ग", "त्रिकोण"],
+            question_4_correct: "त्रिकोण",
+            question_5: "इनमें से कौन उड़ सकता है?",
+            question_5_options: ["बिल्ली", "कुत्ता", "पक्षी"],
+            question_5_correct: "पक्षी",
+            question_6: "आप अपने पैरों पर क्या पहनते हैं?",
+            question_6_options: ["टोपी", "जूते", "दस्ताने"],
+            question_6_correct: "जूते"
+        },
+        telugu: {
+            assignments_title: "అసైన్మెంట్లు - న్యూరోస్టార్స్",
+            neurostars: "న్యూరోస్టార్స్",
+            login_register: "లాగిన్ / రిజిస్టర్",
+            home: "హోమ్",
+            games: "గేమ్స్",
+            learning: "లెర్నింగ్",
+            assignments: "అసైన్మెంట్లు",
+            resources: "వనరులు",
+            community: "సమాజం",
+            assignments_desc: "న్యూరోడైవర్జెంట్ పిల్లల కోసం రూపొందించిన ఆనందకరమైన, ఇంటరాక్టివ్ అసైన్మెంట్లతో సాధన చేయండి మరియు నేర్చుకోండి.",
+            loading_assignment: "అసైన్మెంట్ లోడ్ అవుతోంది...",
+            stars: "స్టార్స్",
+            next_assignment: "తదుపరి అసైన్మెంట్",
+            correct_feedback: "✅ సరైనది! గొప్ప పని!",
+            incorrect_feedback: "❌ మళ్లీ ప్రయత్నించండి!",
+            all_done: "🎉 అన్నీ పూర్తయ్యాయి! మీరు స్టార్!",
+            about_us: "మా గురించి",
+            our_mission: "మా మిషన్",
+            contact: "సంప్రదించండి",
+            support: "మద్దతు",
+            for_parents: "తల్లిదండ్రుల కోసం",
+            for_educators: "ఎడ్యుకేటర్స్ కోసం",
+            research: "పరిశోధన",
+            blog: "బ్లాగ్",
+            activities: "కార్యకలాపాలు",
+            learning_modules: "లెర్నింగ్ మాడ్యూల్స్",
+            communication_tools: "కమ్యూనికేషన్ టూల్స్",
+            connect: "కనెక్ట్",
+            community_forum: "కమ్యూనిటీ ఫోరమ్",
+            events: "ఈవెంట్స్",
+            newsletter: "న్యూస్‌లెటర్",
+            feedback: "ఫీడ్‌బ్యాక్",
+            copyright: "© 2025 న్యూరోస్టార్స్. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
+            // Assignment-specific translations
+            question_1: "ఆకాశం యొక్క రంగు ఏమిటి?",
+            question_1_options: ["ఆకుపచ్చ", "నీలం", "ఎరుపు"],
+            question_1_correct: "నీలం",
+            question_2: "పిల్లి ఏ శబ్దం చేస్తుంది?",
+            question_2_options: ["బౌ", "మియావ్", "మూ"],
+            question_2_correct: "మియావ్",
+            question_3: "ఇవి ఏవి ఫలం?",
+            question_3_options: ["ఆపిల్", "కారు", "కుర్చీ"],
+            question_3_correct: "ఆపిల్",
+            question_4: "ఏ ఆకారం మూడు వైపులు కలిగి ఉంటుంది?",
+            question_4_options: ["వృత్తం", "చతురస్రం", "త్రిభుజం"],
+            question_4_correct: "త్రిభుజం",
+            question_5: "ఇవి ఏవి ఎగరగలవు?",
+            question_5_options: ["పిల్లి", "కుక్క", "పక్షి"],
+            question_5_correct: "పక్షి",
+            question_6: "మీరు మీ పాదాలపై ఏమి ధరిస్తారు?",
+            question_6_options: ["టోపీ", "షూస్", "గ్లోవ్స్"],
+            question_6_correct: "షూస్"
+        }
+    };
+
+    // Initialize language
+    let currentLanguage = localStorage.getItem('language') || 'english';
+    document.getElementById('current-language').textContent = translations[currentLanguage].neurostars.split(' ')[0];
+
+    // Update text based on selected language
+    function updateLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem('language', lang);
+        document.getElementById('current-language').textContent = translations[lang].neurostars.split(' ')[0];
+
+        // Update all elements with data-translate attribute
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            element.textContent = translations[lang][key];
+        });
+
+        // Update title
+        document.querySelector('title').textContent = translations[lang].assignments_title;
+
+        // Update current assignment
+        loadCurrentAssignment();
+    }
+
+    // Language selector
+    const languageBtn = document.getElementById('language-btn');
+    const languageDropdown = document.getElementById('language-dropdown');
+    const languageOptions = document.querySelectorAll('.language-option');
+
+    languageBtn.addEventListener('click', () => {
+        languageDropdown.classList.toggle('active');
+    });
+
+    languageOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            updateLanguage(lang);
+            languageDropdown.classList.remove('active');
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+            languageDropdown.classList.remove('active');
+        }
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
+
+    // Assignment logic
+    let currentIndex = 0;
+    let stars = 0;
+
+    const assignmentKeys = [
+        {
+            question: 'question_1',
+            options: 'question_1_options',
+            correct: 'question_1_correct'
+        },
+        {
+            question: 'question_2',
+            options: 'question_2_options',
+            correct: 'question_2_correct'
+        },
+        {
+            question: 'question_3',
+            options: 'question_3_options',
+            correct: 'question_3_correct'
+        },
+        {
+            question: 'question_4',
+            options: 'question_4_options',
+            correct: 'question_4_correct'
+        },
+        {
+            question: 'question_5',
+            options: 'question_5_options',
+            correct: 'question_5_correct'
+        },
+        {
+            question: 'question_6',
+            options: 'question_6_options',
+            correct: 'question_6_correct'
+        }
+    ];
+
+    function speak(text) {
+        const utter = new SpeechSynthesisUtterance(text);
+        // Adjust voice based on language (if supported)
+        if (currentLanguage === 'hindi' || currentLanguage === 'telugu') {
+            // Note: Browser support for Hindi/Telugu voices may be limited
+            utter.lang = currentLanguage === 'hindi' ? 'hi-IN' : 'te-IN';
+        } else {
+            utter.lang = 'en-US';
+        }
+        window.speechSynthesis.speak(utter);
+    }
+
+    function checkAnswer(selected) {
+        const correct = translations[currentLanguage][assignmentKeys[currentIndex].correct];
+        const feedback = document.getElementById("feedback");
+
+        if (selected === correct) {
+            feedback.textContent = translations[currentLanguage].correct_feedback;
+            feedback.className = 'correct';
+            stars++;
+            document.getElementById("stars").innerHTML = `⭐ <span data-translate="stars">${translations[currentLanguage].stars}</span>: ${stars}`;
+            speak(translations[currentLanguage].correct_feedback);
+        } else {
+            feedback.textContent = translations[currentLanguage].incorrect_feedback;
+            feedback.className = 'incorrect';
+            speak(translations[currentLanguage].incorrect_feedback);
+        }
+    }
+
+    function loadCurrentAssignment() {
+        if (currentIndex >= assignmentKeys.length) {
+            document.getElementById("question").textContent = translations[currentLanguage].all_done;
+            document.getElementById("answers").innerHTML = "";
+            document.querySelector(".next-btn").style.display = "none";
+            speak(translations[currentLanguage].all_done);
+            return;
+        }
+
+        const a = assignmentKeys[currentIndex];
+        document.getElementById("question").textContent = translations[currentLanguage][a.question];
+
+        const answersDiv = document.getElementById("answers");
+        answersDiv.innerHTML = "";
+        translations[currentLanguage][a.options].forEach(option => {
+            const btn = document.createElement("button");
+            btn.textContent = option;
+            btn.className = "answer-btn";
+            btn.onclick = () => checkAnswer(option);
+            answersDiv.appendChild(btn);
+        });
+
+        document.getElementById("feedback").textContent = "";
+        document.getElementById("feedback").className = "";
+        speak(translations[currentLanguage][a.question]);
+    }
+
+    function loadNextAssignment() {
+        currentIndex++;
+        loadCurrentAssignment();
+    }
+
+    // Initial assignment load
+    window.onload = () => {
+        currentIndex = 0;
+        stars = 0;
+        document.getElementById("stars").innerHTML = `⭐ <span data-translate="stars">${translations[currentLanguage].stars}</span>: ${stars}`;
+        updateLanguage(currentLanguage);
+    };
+
+  </script>
+</body>
+</html>

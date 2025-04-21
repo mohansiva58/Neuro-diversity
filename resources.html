@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-translate="resources_title">Resources - NeuroStars</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+        --primary: black;
+        --secondary: #333;
+        --accent: black;
+        --background: white;
+        --text: black;
+        --card-bg: white;
+        --shadow: rgba(0, 0, 0, 0.1);
+        --nav-bg: white;
+    }
+
+    .dark-mode {
+        --primary: white;
+        --secondary: #ccc;
+        --accent: white;
+        --background: black;
+        --text: white;
+        --card-bg: #111;
+        --shadow: rgba(255, 255, 255, 0.1);
+        --nav-bg: #222;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background);
+        color: var(--text);
+        line-height: 1.6;
+    }
+
+    header {
+        background: var(--primary);
+        color: var(--background);
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px var(--shadow);
+    }
+
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .logo-icon {
+        font-size: 2rem;
+    }
+
+    .controls {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .btn {
+        background-color: var(--background);
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        box-shadow: 0 2px 5px var(--shadow);
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: var(--primary);
+        color: var(--background);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    #dark-mode-toggle {
+        background-color: transparent;
+        border: none;
+        color: var(--background);
+        cursor: pointer;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    #dark-mode-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    nav {
+        background-color: var(--nav-bg);
+        color: var(--text);
+        padding: 0.75rem 0;
+        box-shadow: 0 2px 5px var(--shadow);
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        background-color: var(--primary);
+        color: var(--background);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
+
+    .page-header p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .resource-section {
+        margin-bottom: 3rem;
+    }
+
+    .resource-section h2 {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .resource-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .resource-card {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px var(--shadow);
+        transition: transform 0.3s ease;
+    }
+
+    .resource-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .resource-preview {
+        height: 180px;
+        background-color: var(--secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--background);
+        font-size: 3rem;
+    }
+
+    .resource-info {
+        padding: 1.5rem;
+    }
+
+    .resource-info h3 {
+        color: var(--primary);
+        margin-bottom: 0.75rem;
+        font-size: 1.25rem;
+    }
+
+    .resource-info p {
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .resource-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tag {
+        background-color: var(--secondary);
+        color: var(--background);
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.85rem;
+    }
+
+    .resource-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .language-selector {
+        position: relative;
+    }
+
+    .language-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: var(--background);
+        color: var(--text);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px var(--shadow);
+        padding: 0.5rem;
+        min-width: 120px;
+        z-index: 200;
+        display: none;
+    }
+
+    .language-dropdown.active {
+        display: block;
+    }
+
+    .language-option {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.2s ease;
+    }
+
+    .language-option:hover {
+        background-color: var(--primary);
+        color: var(--background);
+    }
+
+    footer {
+        background-color: var(--nav-bg);
+        color: var(--text);
+        padding: 3rem 0;
+        margin-top: 3rem;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .footer-column h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 0.5rem;
+    }
+
+    .footer-column ul {
+        list-style: none;
+    }
+
+    .footer-column ul li {
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-column a {
+        color: var(--text);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+        color: var(--accent);
+    }
+
+    .copyright {
+        text-align: center;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
+    }
+
+    .dark-mode .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .controls {
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+        }
+
+        .resource-section h2 {
+            font-size: 1.5rem;
+        }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+        <div class="logo">
+            <span class="logo-icon">✨</span>
+            <span data-translate="neurostars">NeuroStars</span>
+        </div>
+        <div class="controls">
+            <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
+            <div class="language-selector">
+                <button class="btn" id="language-btn">
+                    <span id="current-language">English</span>
+                    <span>▼</span>
+                </button>
+                <div class="language-dropdown" id="language-dropdown">
+                    <div class="language-option" data-lang="english">English</div>
+                    <div class="language-option" data-lang="hindi">हिंदी</div>
+                    <div class="language-option" data-lang="telugu">తెలుగు</div>
+                </div>
+            </div>
+            <a href="login.html" class="btn" data-translate="login_register">Login / Register</a>
+        </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+        <ul class="nav-links">
+            <li><a href="index.html" data-translate="home">Home</a></li>
+            <li><a href="games.html" data-translate="games">Games</a></li>
+            <li><a href="learning.html" data-translate="learning">Learning</a></li>
+            <li><a href="assignments.html" data-translate="assignments">Assignments</a></li>
+            <li><a href="resources.html" class="active" data-translate="resources">Resources</a></li>
+            <li><a href="community.html" data-translate="community">Community</a></li>
+        </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="page-header">
+        <h1 data-translate="resources">Resources</h1>
+        <p data-translate="resources_desc">Explore a variety of tools, guides, and articles to support neurodivergent children, their families, and educators.</p>
+    </section>
+
+    <section class="resource-section" id="parents">
+        <h2 data-translate="for_parents">For Parents</h2>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <div class="resource-preview">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <div class="resource-info">
+                    <h3 data-translate="parent_guide">Parenting Guide</h3>
+                    <p data-translate="parent_guide_desc">A comprehensive guide on supporting your neurodivergent child’s development.</p>
+                    <div class="resource-tags">
+                        <span class="tag" data-translate="guide">Guide</span>
+                        <span class="tag" data-translate="parenting">Parenting</span>
+                    </div>
+                    <a href="#parent-guide" class="btn resource-btn" data-translate="view_resource">View Resource</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-preview">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="resource-info">
+                    <h3 data-translate="webinar_series">Webinar Series</h3>
+                    <p data-translate="webinar_series_desc">Join our experts for tips on creating a supportive home environment.</p>
+                    <div class="resource-tags">
+                        <span class="tag" data-translate="video">Video</span>
+                        <span class="tag" data-translate="parenting">Parenting</span>
+                    </div>
+                    <a href="#webinar-series" class="btn resource-btn" data-translate="view_resource">View Resource</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="resource-section" id="educators">
+        <h2 data-translate="for_educators">For Educators</h2>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <div class="resource-preview">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="resource-info">
+                    <h3 data-translate="classroom_strategies">Classroom Strategies</h3>
+                    <p data-translate="classroom_strategies_desc">Practical strategies for inclusive teaching and supporting neurodivergent students.</p>
+                    <div class="resource-tags">
+                        <span class="tag" data-translate="guide">Guide</span>
+                        <span class="tag" data-translate="education">Education</span>
+                    </div>
+                    <a href="#classroom-strategies" class="btn resource-btn" data-translate="view_resource">View Resource</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-preview">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="resource-info">
+                    <h3 data-translate="lesson_plans">Lesson Plans</h3>
+                    <p data-translate="lesson_plans_desc">Download adaptable lesson plans for diverse learning needs.</p>
+                    <div class="resource-tags">
+                        <span class="tag" data-translate="download">Download</span>
+                        <span class="tag" data-translate="education">Education</span>
+                    </div>
+                    <a href="#lesson-plans" class="btn resource-btn" data-translate="view_resource">View Resource</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="resource-section" id="research">
+        <h2 data-translate="research">Research</h2>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <div class="resource-preview">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <div class="resource-info">
+                    <h3 data-translate="research_papers">Research Papers</h3>
+                    <p data-translate="research_papers_desc">Access the latest studies on neurodiversity and education.</p>
+                    <div class="resource-tags">
+                        <span class="tag" data-translate="article">Article</span>
+                        <span class="tag" data-translate="research">Research</span>
+                    </div>
+                    <a href="#research-papers" class="btn resource-btn" data-translate="view_resource">View Resource</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-preview">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="resource-info">
+                    <h3 data-translate="blog_articles">Blog Articles</h3>
+                    <p data-translate="blog_articles_desc">Read insights and updates from our team and community.</p>
+                    <div class="resource-tags">
+                        <span class="tag" data-translate="blog">Blog</span>
+                        <span class="tag" data-translate="research">Research</span>
+                    </div>
+                    <a href="#blog-articles" class="btn resource-btn" data-translate="view_resource">View Resource</a>
+                </div>
+            </div>
+        </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-translate="neurostars">NeuroStars</h3>
+            <ul>
+                <li><a href="about.html" data-translate="about_us">About Us</a></li>
+                <li><a href="about.html#mission" data-translate="our_mission">Our Mission</a></li>
+                <li><a href="contact.html" data-translate="contact">Contact</a></li>
+                <li><a href="support.html" data-translate="support">Support</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3 data-translate="resources">Resources</h3>
+            <ul>
+                <li><a href="resources.html#parents" data-translate="for_parents">For Parents</a></li>
+                <li><a href="resources.html#educators" data-translate="for_educators">For Educators</a></li>
+                <li><a href="resources.html#research" data-translate="research">Research</a></li>
+                <li><a href="blog.html" data-translate="blog">Blog</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3 data-translate="activities">Activities</h3>
+            <ul>
+                <li><a href="games.html" data-translate="games">Games</a></li>
+                <li><a href="learning.html" data-translate="learning_modules">Learning Modules</a></li>
+                <li><a href="assignments.html" data-translate="assignments">Assignments</a></li>
+                <li><a href="tools.html" data-translate="communication_tools">Communication Tools</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3 data-translate="connect">Connect</h3>
+            <ul>
+                <li><a href="community.html" data-translate="community_forum">Community Forum</a></li>
+                <li><a href="events.html" data-translate="events">Events</a></li>
+                <li><a href="newsletter.html" data-translate="newsletter">Newsletter</a></li>
+                <li><a href="feedback.html" data-translate="feedback">Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p data-translate="copyright">© 2025 NeuroStars. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Language translations
+    const translations = {
+        english: {
+            resources_title: "Resources - NeuroStars",
+            neurostars: "NeuroStars",
+            login_register: "Login / Register",
+            home: "Home",
+            games: "Games",
+            learning: "Learning",
+            assignments: "Assignments",
+            resources: "Resources",
+            community: "Community",
+            resources_desc: "Explore a variety of tools, guides, and articles to support neurodivergent children, their families, and educators.",
+            for_parents: "For Parents",
+            parent_guide: "Parenting Guide",
+            parent_guide_desc: "A comprehensive guide on supporting your neurodivergent child’s development.",
+            webinar_series: "Webinar Series",
+            webinar_series_desc: "Join our experts for tips on creating a supportive home environment.",
+            for_educators: "For Educators",
+            classroom_strategies: "Classroom Strategies",
+            classroom_strategies_desc: "Practical strategies for inclusive teaching and supporting neurodivergent students.",
+            lesson_plans: "Lesson Plans",
+            lesson_plans_desc: "Download adaptable lesson plans for diverse learning needs.",
+            research: "Research",
+            research_papers: "Research Papers",
+            research_papers_desc: "Access the latest studies on neurodiversity and education.",
+            blog_articles: "Blog Articles",
+            blog_articles_desc: "Read insights and updates from our team and community.",
+            guide: "Guide",
+            video: "Video",
+            parenting: "Parenting",
+            education: "Education",
+            download: "Download",
+            article: "Article",
+            blog: "Blog",
+            view_resource: "View Resource",
+            about_us: "About Us",
+            our_mission: "Our Mission",
+            contact: "Contact",
+            support: "Support",
+            for_parents: "For Parents",
+            for_educators: "For Educators",
+            research: "Research",
+            blog: "Blog",
+            activities: "Activities",
+            learning_modules: "Learning Modules",
+            communication_tools: "Communication Tools",
+            connect: "Connect",
+            community_forum: "Community Forum",
+            events: "Events",
+            newsletter: "Newsletter",
+            feedback: "Feedback",
+            copyright: "© 2025 NeuroStars. All rights reserved."
+        },
+        hindi: {
+            resources_title: "संसाधन - न्यूरोस्टार्स",
+            neurostars: "न्यूरोस्टार्स",
+            login_register: "लॉगिन / रजिस्टर",
+            home: "होम",
+            games: "गेम्स",
+            learning: "शिक्षा",
+            assignments: "असाइनमेंट",
+            resources: "संसाधन",
+            community: "समुदाय",
+            resources_desc: "न्यूरोडायवर्जेंट बच्चों, उनके परिवारों और शिक्षकों के समर्थन के लिए विभिन्न उपकरण, गाइड और लेखों का अन्वेषण करें।",
+            for_parents: "माता-पिता के लिए",
+            parent_guide: "पालन-पोषण गाइड",
+            parent_guide_desc: "आपके न्यूरोडायवर्जेंट बच्चे के विकास का समर्थन करने के लिए एक व्यापक गाइड।",
+            webinar_series: "वेबिनार श्रृंखला",
+            webinar_series_desc: "सहायक घरेलू वातावरण बनाने के लिए हमारे विशेषज्ञों के साथ टिप्स के लिए शामिल हों।",
+            for_educators: "शिक्षकों के लिए",
+            classroom_strategies: "कक्षा रणनीतियाँ",
+            classroom_strategies_desc: "समावेशी शिक्षण और न्यूरोडायवर्जेंट छात्रों के समर्थन के लिए व्यावहारिक रणनीतियाँ।",
+            lesson_plans: "पाठ योजनाएँ",
+            lesson_plans_desc: "विविध शिक्षण आवश्यकताओं के लिए अनुकूलनीय पाठ योजनाएँ डाउनलोड करें।",
+            research: "अनुसंधान",
+            research_papers: "शोध पत्र",
+            research_papers_desc: "न्यूरोडायवर्सिटी और शिक्षा पर नवीनतम अध्ययनों तक पहुँच।",
+            blog_articles: "ब्लॉग लेख",
+            blog_articles_desc: "हमारी टीम और समुदाय से अंतर्दृष्टि और अपडेट पढ़ें।",
+            guide: "गाइड",
+            video: "वीडियो",
+            parenting: "पालन-पोषण",
+            education: "शिक्षा",
+            download: "डाउनलोड",
+            article: "लेख",
+            blog: "ब्लॉग",
+            view_resource: "संसाधन देखें",
+            about_us: "हमारे बारे में",
+            our_mission: "हमारा मिशन",
+            contact: "संपर्क",
+            support: "समर्थन",
+            for_parents: "माता-पिता के लिए",
+            for_educators: "शिक्षकों के लिए",
+            research: "अनुसंधान",
+            blog: "ब्लॉग",
+            activities: "गतिविधियाँ",
+            learning_modules: "शिक्षा मॉड्यूल",
+            communication_tools: "संचार उपकरण",
+            connect: "जुड़ें",
+            community_forum: "समुदाय मंच",
+            events: "आयोजन",
+            newsletter: "न्यूज़लेटर",
+            feedback: "प्रतिक्रिया",
+            copyright: "© 2025 न्यूरोस्टार्स। सर्वाधिकार सुरक्षित।"
+        },
+        telugu: {
+            resources_title: "వనరులు - న్యూరోస్టార్స్",
+            neurostars: "న్యూరోస్టార్స్",
+            login_register: "లాగిన్ / రిజిస్టర్",
+            home: "హోమ్",
+            games: "గేమ్స్",
+            learning: "లెర్నింగ్",
+            assignments: "అసైన్మెంట్లు",
+            resources: "వనరులు",
+            community: "సమాజం",
+            resources_desc: "న్యూరోడైవర్జెంట్ పిల్లలు, వారి కుటుంబాలు మరియు ఎడ్యుకేటర్స్‌కు మద్దతు ఇవ్వడానికి వివిధ సాధనాలు, గైడ్‌లు మరియు ఆర్టికల్స్‌ను అన్వేషించండి.",
+            for_parents: "తల్లిదండ్రుల కోసం",
+            parent_guide: "పేరెంటింగ్ గైడ్",
+            parent_guide_desc: "మీ న్యూరోడైవర్జెంట్ బిడ్డ అభివృద్ధిని సమర్థించడానికి ఒక సమగ్ర గైడ్.",
+            webinar_series: "వెబినార్ సిరీస్",
+            webinar_series_desc: "మద్దతు ఇచ్చే గృహ వాతావరణాన్ని సృష్టించడానికి చిట్కాల కోసం మా నిపుణులతో చేరండి.",
+            for_educators: "ఎడ్యుకేటర్స్ కోసం",
+            classroom_strategies: "క్లాస్‌రూమ్ వ్యూహాలు",
+            classroom_strategies_desc: "సమగ్ర బోధన మరియు న్యూరోడైవర్జెంట్ విద్యార్థులకు మద్దతు ఇవ్వడానికి ఆచరణాత్మక వ్యూహాలు.",
+            lesson_plans: "పాఠ ప్రణాళికలు",
+            lesson_plans_desc: "విభిన్న అభ్యాస అవసరాల కోసం అనుకూలమైన పాఠ ప్రణాళికలను డౌన్‌లోడ్ చేయండి.",
+            research: "పరిశోధన",
+            research_papers: "రీసెర్చ్ పేపర్స్",
+            research_papers_desc: "న్యూరోడైవర్సిటీ మరియు విద్యపై తాజా అధ్యయనాలను యాక్సెస్ చేయండి.",
+            blog_articles: "బ్లాగ్ ఆర్టికల్స్",
+            blog_articles_desc: "మా బృందం మరియు సమాజం నుండి అంతర్దృష్టులు మరియు అప్‌డేట్‌లను చదవండి.",
+            guide: "గైడ్",
+            video: "వీడియో",
+            parenting: "పేరెంటింగ్",
+            education: "విద్య",
+            download: "డౌన్‌లోడ్",
+            article: "ఆర్టికల్",
+            blog: "బ్లాగ్",
+            view_resource: "వనరును వీక్షించండి",
+            about_us: "మా గురించి",
+            our_mission: "మా మిషన్",
+            contact: "సంప్రదించండి",
+            support: "మద్దతు",
+            for_parents: "తల్లిదండ్రుల కోసం",
+            for_educators: "ఎడ్యుకేటర్స్ కోసం",
+            research: "పరిశోధన",
+            blog: "బ్లాగ్",
+            activities: "కార్యకలాపాలు",
+            learning_modules: "లెర్నింగ్ మాడ్యూల్స్",
+            communication_tools: "కమ్యూనికేషన్ టూల్స్",
+            connect: "కనెక్ట్",
+            community_forum: "కమ్యూనిటీ ఫోరమ్",
+            events: "ఈవెంట్స్",
+            newsletter: "న్యూస్‌లెటర్",
+            feedback: "ఫీడ్‌బ్యాక్",
+            copyright: "© 2025 న్యూరోస్టార్స్. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి."
+        }
+    };
+
+    // Initialize language
+    let currentLanguage = localStorage.getItem('language') || 'english';
+    document.getElementById('current-language').textContent = translations[currentLanguage].neurostars.split(' ')[0];
+
+    // Update text based on selected language
+    function updateLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem('language', lang);
+        document.getElementById('current-language').textContent = translations[lang].neurostars.split(' ')[0];
+
+        // Update all elements with data-translate attribute
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            element.textContent = translations[lang][key];
+        });
+
+        // Update title
+        document.querySelector('title').textContent = translations[lang].resources_title;
+    }
+
+    // Language selector
+    const languageBtn = document.getElementById('language-btn');
+    const languageDropdown = document.getElementById('language-dropdown');
+    const languageOptions = document.querySelectorAll('.language-option');
+
+    languageBtn.addEventListener('click', () => {
+        languageDropdown.classList.toggle('active');
+    });
+
+    languageOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            updateLanguage(lang);
+            languageDropdown.classList.remove('active');
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+            languageDropdown.classList.remove('active');
+        }
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
+
+    // Initialize language on page load
+    updateLanguage(currentLanguage);
+  </script>
+</body>
+</html>

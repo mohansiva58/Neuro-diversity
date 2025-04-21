@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-translate="login_title">Sign In / Sign Up - NeuroStars</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+        --primary: black;
+        --secondary: #333;
+        --accent: black;
+        --background: white;
+        --text: black;
+        --card-bg: white;
+        --shadow: rgba(0, 0, 0, 0.1);
+        --nav-bg: white;
+        --success: green;
+        --error: red;
+    }
+
+    .dark-mode {
+        --primary: white;
+        --secondary: #ccc;
+        --accent: white;
+        --background: black;
+        --text: white;
+        --card-bg: #111;
+        --shadow: rgba(255, 255, 255, 0.1);
+        --nav-bg: #222;
+        --success: #90EE90;
+        --error: #FF4040;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background);
+        color: var(--text);
+        line-height: 1.6;
+    }
+
+    header {
+        background: var(--primary);
+        color: var(--background);
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px var(--shadow);
+    }
+
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .logo-icon {
+        font-size: 2rem;
+    }
+
+    .controls {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .btn {
+        background-color: var(--background);
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        box-shadow: 0 2px 5px var(--shadow);
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background-color: var(--primary);
+        color: var(--background);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    #dark-mode-toggle {
+        background-color: transparent;
+        border: none;
+        color: var(--background);
+        cursor: pointer;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    #dark-mode-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    nav {
+        background-color: var(--nav-bg);
+        color: var(--text);
+        padding: 0.75rem 0;
+        box-shadow: 0 2px 5px var(--shadow);
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        background-color: var(--primary);
+        color: var(--background);
+    }
+
+    .hamburger {
+        display: none;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: var(--text);
+        cursor: pointer;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 200px);
+    }
+
+    .form-container {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px var(--shadow);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .form-container h1 {
+        font-size: 1.8rem;
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-container p {
+        font-size: 1rem;
+        color: var(--secondary);
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-container input {
+        width: 100%;
+        padding: 0.75rem;
+        margin: 0.5rem 0;
+        border: 1px solid var(--secondary);
+        border-radius: 8px;
+        font-size: 1rem;
+        background-color: var(--background);
+        color: var(--text);
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--primary);
+        color: var(--background);
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0.5rem 0;
+    }
+
+    .form-container button:hover {
+        background-color: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    .form-container .google-btn {
+        background-color: #4285F4;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-container .google-btn img {
+        margin-right: 0.5rem;
+        width: 20px;
+    }
+
+    .form-container .toggle-link {
+        font-size: 0.9rem;
+        color: var(--primary);
+        text-decoration: none;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .form-container .toggle-link:hover {
+        text-decoration: underline;
+    }
+
+    .error {
+        color: var(--error);
+        font-size: 0.9rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        display: none;
+    }
+
+    .success {
+        color: var(--success);
+        font-size: 0.9rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        display: none;
+    }
+
+    .language-selector {
+        position: relative;
+    }
+
+    .language-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: var(--background);
+        color: var(--text);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px var(--shadow);
+        padding: 0.5rem;
+        min-width: 120px;
+        z-index: 200;
+        display: none;
+    }
+
+    .language-dropdown.active {
+        display: block;
+    }
+
+    .language-option {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.2s ease;
+    }
+
+    .language-option:hover {
+        background-color: var(--primary);
+        color: var(--background);
+    }
+
+    footer {
+        background-color: var(--nav-bg);
+        color: var(--text);
+        padding: 3rem 0;
+        margin-top: 3rem;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .footer-column h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 0.5rem;
+    }
+
+    .footer-column ul {
+        list-style: none;
+    }
+
+    .footer-column ul li {
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-column a {
+        color: var(--text);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+        color: var(--accent);
+    }
+
+    .copyright {
+        text-align: center;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
+    }
+
+    .dark-mode .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .controls {
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .hamburger {
+            display: block;
+            align-self: flex-end;
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links a {
+            padding: 0.75rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .form-container {
+            padding: 1.5rem;
+        }
+
+        .form-container h1 {
+            font-size: 1.5rem;
+        }
+
+        .form-container p {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .form-container {
+            padding: 1rem;
+        }
+
+        .form-container h1 {
+            font-size: 1.3rem;
+        }
+
+        .form-container input,
+        .form-container button {
+            font-size: 0.9rem;
+            padding: 0.6rem;
+        }
+
+        .form-container .toggle-link {
+            font-size: 0.8rem;
+        }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+        <div class="logo">
+            <span class="logo-icon">✨</span>
+            <span data-translate="neurostars">NeuroStars</span>
+        </div>
+        <div class="controls">
+            <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
+            <div class="language-selector">
+                <button class="btn" id="language-btn">
+                    <span id="current-language">English</span>
+                    <span>▼</span>
+                </button>
+                <div class="language-dropdown" id="language-dropdown">
+                    <div class="language-option" data-lang="english">English</div>
+                    <div class="language-option" data-lang="hindi">हिंदी</div>
+                    <div class="language-option" data-lang="telugu">తెలుగు</div>
+                </div>
+            </div>
+            <a href="login.html" class="btn active" data-translate="login_register">Login / Register</a>
+        </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+        <button class="hamburger" id="hamburger">☰</button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" data-translate="home">Home</a></li>
+            <li><a href="games.html" data-translate="games">Games</a></li>
+            <li><a href="learning.html" data-translate="learning">Learning</a></li>
+            <li><a href="assignments.html" data-translate="assignments">Assignments</a></li>
+            <li><a href="resources.html" data-translate="resources">Resources</a></li>
+            <li><a href="community.html" data-translate="community">Community</a></li>
+        </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="form-container" id="auth-form">
+        <h1 id="form-title" data-translate="welcome_back">Welcome Back to NeuroStars</h1>
+        <p id="form-subtitle" data-translate="keep_data_safe">Keep your data safe</p>
+        <div id="error-message" class="error" data-translate="error_message"></div>
+        <form id="authForm">
+            <div id="email-section">
+                <input type="email" id="email" placeholder="Email" data-translate-placeholder="email_placeholder" required>
+                <input type="password" id="password" placeholder="Password" data-translate-placeholder="password_placeholder" required>
+            </div>
+            <button type="submit" id="submit-btn" data-translate="sign_in">Sign In</button>
+            <button type="button" class="google-btn" id="google-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo" width="20">
+                <span data-translate="google_sign_in">Sign in with Google</span>
+            </button>
+        </form>
+        <p class="toggle-link" id="toggle-link" data-translate="no_account">Don't have an account? Sign Up</p>
+        <p class="toggle-link" onclick="toggleForm('forgot-password-form')" data-translate="forgot_password">Forgot Password?</p>
+    </div>
+
+    <div class="form-container" id="forgot-password-form" style="display: none;">
+        <h1 data-translate="reset_password">Reset Password</h1>
+        <p data-translate="reset_password_text">Please use the link below to reset your password</p>
+        <div id="reset-error-message" class="error" data-translate="reset_error_message"></div>
+        <div id="reset-success-message" class="success" data-translate="reset_success_message"></div>
+        <form id="forgotPasswordForm">
+            <input type="email" id="reset-email" placeholder="Email" data-translate-placeholder="email_placeholder" required>
+            <button type="submit" data-translate="send_reset_email">Send Reset Email</button>
+        </form>
+        <p class="toggle-link" onclick="toggleForm('auth-form')" data-translate="back_to_login">Back to Login</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-translate="neurostars">NeuroStars</h3>
+            <ul>
+                <li><a href="about.html" data-translate="about_us">About Us</a></li>
+                <li><a href="about.html#mission" data-translate="our_mission">Our Mission</a></li>
+                <li><a href="contact.html" data-translate="contact">Contact</a></li>
+                <li><a href="support.html" data-translate="support">Support</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3 data-translate="resources">Resources</h3>
+            <ul>
+                <li><a href="resources.html#parents" data-translate="for_parents">For Parents</a></li>
+                <li><a href="resources.html#educators" data-translate="for_educators">For Educators</a></li>
+                <li><a href="resources.html#research" data-translate="research">Research</a></li>
+                <li><a href="blog.html" data-translate="blog">Blog</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3 data-translate="activities">Activities</h3>
+            <ul>
+                <li><a href="games.html" data-translate="games">Games</a></li>
+                <li><a href="learning.html" data-translate="learning_modules">Learning Modules</a></li>
+                <li><a href="assignments.html" data-translate="assignments">Assignments</a></li>
+                <li><a href="tools.html" data-translate="communication_tools">Communication Tools</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3 data-translate="connect">Connect</h3>
+            <ul>
+                <li><a href="community.html" data-translate="community_forum">Community Forum</a></li>
+                <li><a href="events.html" data-translate="events">Events</a></li>
+                <li><a href="newsletter.html" data-translate="newsletter">Newsletter</a></li>
+                <li><a href="feedback.html" data-translate="feedback">Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p data-translate="copyright">© 2025 NeuroStars. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Language translations
+    const translations = {
+        english: {
+            login_title: "Sign In / Sign Up - NeuroStars",
+            neurostars: "NeuroStars",
+            login_register: "Login / Register",
+            home: "Home",
+            games: "Games",
+            learning: "Learning",
+            assignments: "Assignments",
+            resources: "Resources",
+            community: "Community",
+            welcome_back: "Welcome Back to NeuroStars",
+            keep_data_safe: "Keep your data safe",
+            sign_in: "Sign In",
+            google_sign_in: "Sign in with Google",
+            no_account: "Don't have an account? Sign Up",
+            forgot_password: "Forgot Password?",
+            reset_password: "Reset Password",
+            reset_password_text: "Please use the link below to reset your password",
+            send_reset_email: "Send Reset Email",
+            back_to_login: "Back to Login",
+            email_placeholder: "Email",
+            password_placeholder: "Password",
+            sign_up: "Sign Up",
+            create_account: "Create a new account",
+            already_account: "Already have an account? Sign In",
+            error_message: "",
+            reset_error_message: "",
+            reset_success_message: "Password reset email sent. Please check your inbox.",
+            success_sign_up: "Sign up successful!",
+            success_login: "Login successful!",
+            success_google: "Google sign-in successful!",
+            about_us: "About Us",
+            our_mission: "Our Mission",
+            contact: "Contact",
+            support: "Support",
+            for_parents: "For Parents",
+            for_educators: "For Educators",
+            research: "Research",
+            blog: "Blog",
+            activities: "Activities",
+            learning_modules: "Learning Modules",
+            communication_tools: "Communication Tools",
+            connect: "Connect",
+            community_forum: "Community Forum",
+            events: "Events",
+            newsletter: "Newsletter",
+            feedback: "Feedback",
+            copyright: "© 2025 NeuroStars. All rights reserved."
+        },
+        hindi: {
+            login_title: "साइन इन / साइन अप - न्यूरोस्टार्स",
+            neurostars: "न्यूरोस्टार्स",
+            login_register: "लॉगिन / रजिस्टर",
+            home: "होम",
+            games: "गेम्स",
+            learning: "शिक्षा",
+            assignments: "असाइनमेंट",
+            resources: "संसाधन",
+            community: "समुदाय",
+            welcome_back: "न्यूरोस्टार्स में आपका स्वागत है",
+            keep_data_safe: "अपना डेटा सुरक्षित रखें",
+            sign_in: "साइन इन",
+            google_sign_in: "Google के साथ साइन इन करें",
+            no_account: "खाता नहीं है? साइन अप करें",
+            forgot_password: "पासवर्ड भूल गए?",
+            reset_password: "पासवर्ड रीसेट करें",
+            reset_password_text: "कृपया अपने पासवर्ड को रीसेट करने के लिए नीचे दिए गए लिंक का उपयोग करें",
+            send_reset_email: "रीसेट ईमेल भेजें",
+            back_to_login: "लॉगिन पर वापस जाएं",
+            email_placeholder: "ईमेल",
+            password_placeholder: "पासवर्ड",
+            sign_up: "साइन अप",
+            create_account: "नया खाता बनाएं",
+            already_account: "पहले से खाता है? साइन इन करें",
+            error_message: "",
+            reset_error_message: "",
+            reset_success_message: "पासवर्ड रीसेट ईमेल भेजा गया। कृपया अपना इनबॉक्स चेक करें।",
+            success_sign_up: "साइन अप सफल!",
+            success_login: "लॉगिन सफल!",
+            success_google: "Google साइन-इन सफल!",
+            about_us: "हमारे बारे में",
+            our_mission: "हमारा मिशन",
+            contact: "संपर्क",
+            support: "समर्थन",
+            for_parents: "माता-पिता के लिए",
+            for_educators: "शिक्षकों के लिए",
+            research: "अनुसंधान",
+            blog: "ब्लॉग",
+            activities: "गतिविधियाँ",
+            learning_modules: "शिक्षा मॉड्यूल",
+            communication_tools: "संचार उपकरण",
+            connect: "जुड़ें",
+            community_forum: "समुदाय मंच",
+            events: "आयोजन",
+            newsletter: "न्यूज़लेटर",
+            feedback: "प्रतिक्रिया",
+            copyright: "© 2025 न्यूरोस्टार्स। सर्वाधिकार सुरक्षित।"
+        },
+        telugu: {
+            login_title: "సైన్ ఇన్ / సైన్ అప్ - న్యూరోస్టార్స్",
+            neurostars: "న్యూరోస్టార్స్",
+            login_register: "లాగిన్ / రిజిస్టర్",
+            home: "హోమ్",
+            games: "గేమ్స్",
+            learning: "లెర్నింగ్",
+            assignments: "అసైన్మెంట్లు",
+            resources: "వనరులు",
+            community: "సమాజం",
+            welcome_back: "న్యూరోస్టార్స్‌కు స్వాగతం",
+            keep_data_safe: "మీ డేటాను సురక్షితంగా ఉంచండి",
+            sign_in: "సైన్ ఇన్",
+            google_sign_in: "Googleతో సైన్ ఇన్ చేయండి",
+            no_account: "ఖాతా లేదా? సైన్ అప్ చేయండి",
+            forgot_password: "పాస్‌వర్డ్ మర్చిపోయారా?",
+            reset_password: "పాస్‌వర్డ్ రీసెట్ చేయండి",
+            reset_password_text: "దయచేసి మీ పాస్‌వర్డ్‌ను రీసెట్ చేయడానికి క్రింది లింక్‌ను ఉపయోగించండి",
+            send_reset_email: "రీసెట్ ఈమెయిల్ పంపండి",
+            back_to_login: "లాగిన్‌కు తిరిగి వెళ్ళండి",
+            email_placeholder: "ఈమెయిల్",
+            password_placeholder: "పాస్‌వర్డ్",
+            sign_up: "సైన్ అప్",
+            create_account: "కొత్త ఖాతాను సృష్టించండి",
+            already_account: "ఇప్పటికే ఖాతా ఉందా? సైన్ ఇన్ చేయండి",
+            error_message: "",
+            reset_error_message: "",
+            reset_success_message: "పాస్‌వర్డ్ రీసెట్ ఈమెయిల్ పంపబడింది. దయచేసి మీ ఇన్‌బాక్స్‌ను తనిఖీ చేయండి.",
+            success_sign_up: "సైన్ అప్ విజయవంతం!",
+            success_login: "లాగిన్ విజయవంతం!",
+            success_google: "Google సైన్-ఇన్ విజయవంతం!",
+            about_us: "మా గురించి",
+            our_mission: "మా మిషన్",
+            contact: "సంప్రదించండి",
+            support: "మద్దతు",
+            for_parents: "తల్లిదండ్రుల కోసం",
+            for_educators: "ఎడ్యుకేటర్స్ కోసం",
+            research: "పరిశోధన",
+            blog: "బ్లాగ్",
+            activities: "కార్యకలాపాలు",
+            learning_modules: "లెర్నింగ్ మాడ్యూల్స్",
+            communication_tools: "కమ్యూనికేషన్ టూల్స్",
+            connect: "కనెక్ట్",
+            community_forum: "కమ్యూనిటీ ఫోరమ్",
+            events: "ఈవెంట్స్",
+            newsletter: "న్యూస్‌లెటర్",
+            feedback: "ఫీడ్‌బ్యాక్",
+            copyright: "© 2025 న్యూరోస్టార్స్. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి."
+        }
+    };
+
+    // Initialize language
+    let currentLanguage = localStorage.getItem('language') || 'english';
+    document.getElementById('current-language').textContent = translations[currentLanguage].neurostars.split(' ')[0];
+
+    // Update text based on selected language
+    function updateLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem('language', lang);
+        document.getElementById('current-language').textContent = translations[lang].neurostars.split(' ')[0];
+
+        // Update all elements with data-translate attribute
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            element.textContent = translations[lang][key];
+        });
+
+        // Update placeholder attributes
+        document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-translate-placeholder');
+            element.placeholder = translations[lang][key];
+        });
+
+        // Update title
+        document.querySelector('title').textContent = translations[lang].login_title;
+
+        // Update form based on auth mode
+        updateFormText();
+    }
+
+    // Language selector
+    const languageBtn = document.getElementById('language-btn');
+    const languageDropdown = document.getElementById('language-dropdown');
+    const languageOptions = document.querySelectorAll('.language-option');
+
+    languageBtn.addEventListener('click', () => {
+        languageDropdown.classList.toggle('active');
+    });
+
+    languageOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            updateLanguage(lang);
+            languageDropdown.classList.remove('active');
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+            languageDropdown.classList.remove('active');
+        }
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+
+    // Check for saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☀️';
+    }
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Close hamburger menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            hamburger.textContent = '☰';
+        });
+    });
+
+    // Firebase Authentication
+    const firebaseConfig = {
+        apiKey: "AIzaSyDfwOOxSLGWAtW7p15o3V3RhZlYoeDXIIQ",
+        authDomain: "house-activities.firebaseapp.com",
+        projectId: "house-activities",
+        storageBucket: "house-activities.firebasestorage.app",
+        messagingSenderId: "63921008911",
+        appId: "1:63921008911:web:cb3fe4f2531dc2d63c4e7a"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+    let isSignUp = false;
+
+    function toggleForm(formId) {
+        document.getElementById('auth-form').style.display = formId === 'auth-form' ? 'block' : 'none';
+        document.getElementById('forgot-password-form').style.display = formId === 'forgot-password-form' ? 'block' : 'none';
+        document.getElementById('error-message').style.display = 'none';
+        document.getElementById('reset-error-message').style.display = 'none';
+        document.getElementById('reset-success-message').style.display = 'none';
+    }
+
+    function updateFormText() {
+        document.getElementById('form-title').textContent = translations[currentLanguage][isSignUp ? 'sign_up' : 'welcome_back'];
+        document.getElementById('form-subtitle').textContent = translations[currentLanguage][isSignUp ? 'create_account' : 'keep_data_safe'];
+        document.getElementById('submit-btn').textContent = translations[currentLanguage][isSignUp ? 'sign_up' : 'sign_in'];
+        document.getElementById('toggle-link').textContent = translations[currentLanguage][isSignUp ? 'already_account' : 'no_account'];
+    }
+
+    function toggleAuthMode() {
+        isSignUp = !isSignUp;
+        updateFormText();
+        document.getElementById('error-message').style.display = 'none';
+    }
+
+    document.getElementById('toggle-link').addEventListener('click', toggleAuthMode);
+
+    document.getElementById('authForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('error-message');
+
+        if (isSignUp) {
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert(translations[currentLanguage].success_sign_up);
+                    // Redirect or additional actions
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = error.message;
+                });
+        } else {
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert(translations[currentLanguage].success_login);
+                    // Redirect or additional actions
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = error.message;
+                });
+        }
+    });
+
+    document.getElementById('google-btn').addEventListener('click', function() {
+        auth.signInWithPopup(googleProvider)
+            .then((result) => {
+                alert(translations[currentLanguage].success_google);
+                // Redirect or additional actions
+                window.location.href = 'index.html';
+            }).catch((error) => {
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = error.message;
+            });
+    });
+
+    document.getElementById('forgotPasswordForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('reset-email').value;
+        const errorMessage = document.getElementById('reset-error-message');
+        const successMessage = document.getElementById('reset-success-message');
+
+        auth.sendPasswordResetEmail(email)
+            .then(() => {
+                successMessage.style.display = 'block';
+                successMessage.textContent = translations[currentLanguage].reset_success_message;
+                errorMessage.style.display = 'none';
+            })
+            .catch((error) => {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = error.message;
+                successMessage.style.display = 'none';
+            });
+    });
+
+    // Initialize language on page load
+    updateLanguage(currentLanguage);
+  </script>
+</body>
+</html>
