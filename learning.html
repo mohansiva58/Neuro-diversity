@@ -3,537 +3,384 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Learning Page - Autism Support</title>
-  <link rel="stylesheet" href="style.css">
+  <title data-translate="learning_title">Learning Page - NeuroStars</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: black;
-      --secondary: #333;
-      --accent: black;
-      --background: white;
-      --text: black;
-      --card-bg: #f0f0f0;
-      --shadow: rgba(0, 0, 0, 0.1);
-      --nav-bg: white;
-      --border-color: #ccc;
+        --primary: black;
+        --secondary: #333;
+        --accent: black;
+        --background: white;
+        --text: black;
+        --card-bg: white;
+        --shadow: rgba(0, 0, 0, 0.1);
+        --nav-bg: white;
     }
-  
+
     .dark-mode {
-      --primary: white;
-      --secondary: #ccc;
-      --accent: white;
-      --background: black;
-      --text: white;
-      --card-bg: #333;
-      --shadow: rgba(255, 255, 255, 0.1);
-      --nav-bg: #222;
-      --border-color: #555;
+        --primary: white;
+        --secondary: #ccc;
+        --accent: white;
+        --background: black;
+        --text: white;
+        --card-bg: #111;
+        --shadow: rgba(255, 255, 255, 0.1);
+        --nav-bg: #222;
     }
-  
+
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      transition: background-color 0.3s, color 0.3s;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.3s, color 0.3s;
     }
-  
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--background);
-      color: var(--text);
-      line-height: 1.6;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background);
+        color: var(--text);
+        line-height: 1.6;
+        padding: 20px;
+        text-align: center;
     }
-  
+
     header {
-      background: var(--primary);
-      color: var(--background);
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px var(--shadow);
+        background: var(--primary);
+        color: var(--background);
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px var(--shadow);
     }
-  
+
     .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
-  
+
     .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
-  
+
     .logo-icon {
-      font-size: 2rem;
+        font-size: 2rem;
     }
-  
+
     .controls {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-  
-    .btn {
-      background-color: var(--background);
-      color: var(--primary);
-      border: 1px solid var(--primary);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      box-shadow: 0 2px 5px var(--shadow);
-    }
-  
-    .btn:hover {
-      background-color: var(--primary);
-      color: var(--background);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px var(--shadow);
-    }
-  
-    #dark-mode-toggle {
-      background-color: transparent;
-      border: none;
-      color: var(--background);
-      cursor: pointer;
-      font-size: 1.5rem;
-      padding: 0.3rem;
-      border-radius: 50%;
-    }
-  
-    #dark-mode-toggle:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-  
-    nav {
-      background-color: var(--nav-bg);
-      color: var(--text);
-      padding: 0.5rem 0;
-      box-shadow: 0 2px 5px var(--shadow);
-    }
-  
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-    }
-  
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-      flex-wrap: wrap; /* Added for responsiveness */
-      justify-content: center; /* Added for responsiveness */
-    }
-  
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-      padding: 0.5rem;
-      border-radius: 5px;
-      transition: all 0.3s;
-    }
-  
-    .nav-links a:hover {
-      background-color: var(--primary);
-      color: var(--background);
-    }
-  
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-  
-    .hero {
-      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/api/placeholder/1200/400") no-repeat center center;
-      background-size: cover;
-      color: var(--background);
-      text-align: center;
-      padding: 3rem 1rem; /* Adjusted padding for responsiveness */
-      border-radius: 10px;
-      margin-bottom: 2rem;
-      box-shadow: 0 5px 15px var(--shadow);
-    }
-  
-    .hero h1 {
-      font-size: 2rem; /* Adjusted font size for responsiveness */
-      margin-bottom: 1rem;
-    }
-  
-    .hero p {
-      font-size: 1rem; /* Adjusted font size for responsiveness */
-      max-width: 800px;
-      margin: 0 auto 2rem;
-    }
-  
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-  
-    .btn-large {
-      padding: 0.8rem 1.5rem; /* Adjusted padding for responsiveness */
-      font-size: 1rem; /* Adjusted font size for responsiveness */
-      border-radius: 30px;
-    }
-  
-    .btn-primary {
-      background-color: var(--background);
-      color: var(--primary);
-      border: 1px solid var(--primary);
-    }
-  
-    .btn-primary:hover {
-      background-color: var(--primary);
-      color: var(--background);
-    }
-  
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--background);
-      border: 2px solid var(--background);
-    }
-  
-    .btn-secondary:hover {
-      background-color: var(--background);
-      color: var(--primary);
-    }
-  
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted minmax for responsiveness */
-      gap: 1.5rem; /* Adjusted gap for responsiveness */
-      margin-bottom: 3rem;
-    }
-  
-    .feature-card {
-      background-color: var(--card-bg);
-      border-radius: 10px;
-      padding: 1.5rem; /* Adjusted padding for responsiveness */
-      box-shadow: 0 5px 15px var(--shadow);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-  
-    .feature-card:hover {
-      transform: translateY(-5px); /* Reduced hover lift for responsiveness */
-    }
-  
-    .feature-icon {
-      font-size: 2.5rem; /* Adjusted font size for responsiveness */
-      color: var(--accent);
-      margin-bottom: 0.8rem; /* Adjusted margin for responsiveness */
-    }
-  
-    .feature-card h3 {
-      margin-bottom: 0.8rem; /* Adjusted margin for responsiveness */
-      color: var(--primary);
-      font-size: 1.1rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .activities {
-      margin-bottom: 3rem;
-    }
-  
-    .activities h2 {
-      text-align: center;
-      margin-bottom: 1.5rem; /* Adjusted margin for responsiveness */
-      color: var(--primary);
-      font-size: 1.5rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .activities-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted minmax for responsiveness */
-      gap: 1rem; /* Adjusted gap for responsiveness */
-    }
-  
-    .activity-card {
-      background-color: var(--card-bg);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px var(--shadow);
-      transition: transform 0.3s;
-    }
-  
-    .activity-card:hover {
-      transform: translateY(-3px); /* Reduced hover lift for responsiveness */
-    }
-  
-    .activity-img {
-      height: 150px; /* Adjusted height for responsiveness */
-      background-color: var(--secondary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--background);
-      font-size: 1.5rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .activity-content {
-      padding: 1rem; /* Adjusted padding for responsiveness */
-    }
-  
-    .activity-content h3 {
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-      font-size: 1rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .testimonials {
-      background-color: var(--card-bg);
-      border-radius: 10px;
-      padding: 2rem; /* Adjusted padding for responsiveness */
-      margin-bottom: 3rem;
-      box-shadow: 0 5px 15px var(--shadow);
-    }
-  
-    .testimonials h2 {
-      text-align: center;
-      margin-bottom: 1.5rem; /* Adjusted margin for responsiveness */
-      color: var(--primary);
-      font-size: 1.5rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .testimonial-slider {
-      overflow: hidden;
-      position: relative;
-      height: 150px; /* Adjusted height for responsiveness */
-    }
-  
-    .testimonial {
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.5s;
-      padding: 0 1rem; /* Added padding for smaller screens */
-      box-sizing: border-box; /* Ensure padding doesn't affect width */
-    }
-  
-    .testimonial.active {
-      opacity: 1;
-    }
-  
-    .testimonial-text {
-      font-style: italic;
-      margin-bottom: 0.8rem; /* Adjusted margin for responsiveness */
-      font-size: 0.9rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .testimonial-author {
-      font-weight: bold;
-      color: var(--primary);
-      font-size: 1rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .language-selector {
-      position: relative;
-    }
-  
-    .language-dropdown {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: var(--background);
-      color: var(--text);
-      border-radius: 5px;
-      box-shadow: 0 5px 15px var(--shadow);
-      padding: 0.5rem;
-      display: none;
-      z-index: 200;
-    }
-  
-    .language-dropdown.active {
-      display: block;
-    }
-  
-    .language-option {
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      white-space: nowrap;
-      font-size: 0.9rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .language-option:hover {
-      background-color: var(--secondary);
-      color: var(--background);
-      border-radius: 5px;
-    }
-  
-    footer {
-      background-color: var(--nav-bg);
-      color: var(--text);
-      padding: 1.5rem 0; /* Adjusted padding for responsiveness */
-      margin-top: 2rem;
-    }
-  
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjusted minmax for responsiveness */
-      gap: 1rem; /* Adjusted gap for responsiveness */
-      padding: 0 1rem;
-    }
-  
-    .footer-column h3 {
-      margin-bottom: 0.8rem; /* Adjusted margin for responsiveness */
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 0.3rem; /* Adjusted padding for responsiveness */
-      display: inline-block;
-      color: var(--primary);
-      font-size: 1rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .footer-column ul {
-      list-style: none;
-    }
-  
-    .footer-column ul li {
-      margin-bottom: 0.3rem; /* Adjusted margin for responsiveness */
-    }
-  
-    .footer-column a {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.9rem; /* Adjusted font size for responsiveness */
-    }
-  
-    .footer-column a:hover {
-      color: var(--accent);
-    }
-  
-    .copyright {
-      text-align: center;
-      padding-top: 1.5rem; /* Adjusted padding for responsiveness */
-      margin-top: 1.5rem; /* Adjusted margin for responsiveness */
-      border-top: 1px solid var(--border-color);
-      font-size: 0.8rem; /* Adjusted font size for responsiveness */
-    }
-  
-    @media (max-width: 768px) {
-      .header-container {
-        flex-direction: column;
+        display: flex;
         gap: 1rem;
-        align-items: flex-start; /* Align items to the start on smaller screens */
-      }
-  
-      .controls {
-        width: 100%;
-        justify-content: flex-start; /* Align controls to the start */
-      }
-  
-      .nav-container {
-        flex-direction: column;
-        align-items: flex-start; /* Align nav to the start */
-      }
-  
-      .nav-links {
-        margin-top: 1rem;
-        flex-direction: row; /* Keep links horizontal */
-        overflow-x: auto; /* Enable horizontal scrolling for nav links */
-        justify-content: flex-start; /* Align links to the start */
-        padding-bottom: 0.5rem; /* Add some padding below the scrollable nav */
-      }
-  
-      .nav-links li {
-        flex-shrink: 0; /* Prevent shrinking of nav items */
-      }
-  
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-  
-      .hero p {
-        font-size: 0.9rem;
-      }
+        align-items: center;
     }
-  
-    @media (max-width: 480px) {
-      .nav-links {
-        flex-direction: column; /* Stack nav links on very small screens */
-        align-items: flex-start;
-      }
-  
-      .hero h1 {
-        font-size: 1.6rem;
-      }
-  
-      .hero-buttons {
-        flex-direction: column; /* Stack buttons on very small screens */
-        align-items: stretch; /* Make buttons full width */
-      }
-  
-      .btn-large {
-        width: 100%; /* Make buttons full width */
-        margin-bottom: 0.5rem;
-      }
-  
-      .features {
-        grid-template-columns: 1fr; /* Single column layout on very small screens */
-      }
-  
-      .activities-grid {
-        grid-template-columns: 1fr; /* Single column layout on very small screens */
-      }
-  
-      .testimonial-slider {
-        height: auto; /* Adjust height for content */
-      }
-  
-      .testimonial {
-        position: static; /* Allow stacking of testimonials */
+
+    .btn {
+        background-color: var(--background);
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        box-shadow: 0 2px 5px var(--shadow);
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: var(--primary);
+        color: var(--background);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    #dark-mode-toggle {
+        background-color: transparent;
+        border: none;
+        color: var(--background);
+        cursor: pointer;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    #dark-mode-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    nav {
+        background-color: var(--nav-bg);
+        color: var(--text);
+        padding: 0.75rem 0;
+        box-shadow: 0 2px 5px var(--shadow);
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        background-color: var(--primary);
+        color: var(--background);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .learning-paths,
+    .learning-module,
+    .reward {
+        background-color: var(--card-bg);
+        border: 2px solid var(--primary);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem auto;
+        width: 90%;
+        max-width: 600px;
+        box-shadow: 0 5px 15px var(--shadow);
+    }
+
+    .learning-paths h2,
+    .learning-module h2,
+    .reward h2 {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+    }
+
+    .paths {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+
+    .paths button {
+        font-size: 1.1em;
+        padding: 0.75rem;
+        border: 2px solid var(--primary);
+        border-radius: 15px;
+        background-color: var(--background);
+        color: var(--primary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .paths button:hover {
+        background-color: var(--primary);
+        color: var(--background);
+        transform: translateY(-2px);
+    }
+
+    .instruction {
+        font-size: 1.5em;
+        margin-bottom: 1.5rem;
+        color: var(--text);
+    }
+
+    .options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .options button {
+        font-size: 1.2em;
+        padding: 0.75rem 1.5rem;
+        border: 2px solid var(--primary);
+        border-radius: 15px;
+        background-color: var(--background);
+        color: var(--primary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .options button:hover {
+        background-color: var(--primary);
+        color: var(--background);
+        transform: translateY(-2px);
+    }
+
+    #feedback {
+        font-size: 1.2em;
+        margin-top: 1.5rem;
+        font-weight: bold;
+    }
+
+    #stars {
+        font-size: 2.5em;
+        color: var(--primary);
+    }
+
+    .language-selector {
+        position: relative;
+    }
+
+    .language-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: var(--background);
+        color: var(--text);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px var(--shadow);
+        padding: 0.5rem;
+        min-width: 120px;
+        z-index: 200;
+        display: none;
+    }
+
+    .language-dropdown.active {
+        display: block;
+    }
+
+    .language-option {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.2s ease;
+    }
+
+    .language-option:hover {
+        background-color: var(--primary);
+        color: var(--background);
+    }
+
+    footer {
+        background-color: var(--nav-bg);
+        color: var(--text);
+        padding: 3rem 0;
+        margin-top: 3rem;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .footer-column h3 {
+        color: var(--primary);
         margin-bottom: 1rem;
-      }
-  
-      .footer-container {
-        grid-template-columns: 1fr; /* Single column layout on very small screens */
-      }
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 0.5rem;
     }
-  
-    /* WCAG AAA Compliance */
-    a:focus,
-    button:focus,
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: 3px solid var(--accent);
-      outline-offset: 2px;
+
+    .footer-column ul {
+        list-style: none;
     }
-  
-    /* Animation Toggle */
-    [data-animations="off"] .card,
-    [data-animations="off"] .emotion-card {
-      transition: none;
+
+    .footer-column ul li {
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-column a {
+        color: var(--text);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+        color: var(--accent);
+    }
+
+    .copyright {
+        text-align: center;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
+    }
+
+    .dark-mode .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .controls {
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .learning-paths h2,
+        .learning-module h2,
+        .reward h2 {
+            font-size: 1.5rem;
+        }
+
+        .instruction {
+            font-size: 1.2em;
+        }
+
+        .options button,
+        .paths button {
+            font-size: 1em;
+            padding: 0.5rem 1rem;
+        }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Learning Page</h1>
     <div class="header-container">
         <div class="logo">
             <span class="logo-icon">✨</span>
-            <span>NeuroStars</span>
+            <span data-translate="neurostars">NeuroStars</span>
         </div>
         <div class="controls">
-            <button id="dark-mode-toggle">🌙</button>
+            <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
             <div class="language-selector">
                 <button class="btn" id="language-btn">
                     <span id="current-language">English</span>
@@ -545,83 +392,506 @@
                     <div class="language-option" data-lang="telugu">తెలుగు</div>
                 </div>
             </div>
-            <button class="btn">Login / Register</button>
+            <a href="login.html" class="btn" data-translate="login_register">Login / Register</a>
         </div>
     </div>
-    
   </header>
   <nav>
     <div class="nav-container">
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="games.html">Games</a></li>
-            <li><a href="learning.html">Learning</a></li>
-            <li><a href="#assignments">Assignments</a></li>
-            <li><a href="#resources">Resources</a></li>
-            <li><a href="#community">Community</a></li>
-        </ul>
+      <ul class="nav-links">
+        <li><a href="index.html" data-translate="home">Home</a></li>
+        <li><a href="games.html" data-translate="games">Games</a></li>
+        <li><a href="learning.html" class="active" data-translate="learning">Learning</a></li>
+        <li><a href="assignments.html" data-translate="assignments">Assignments</a></li>
+        <li><a href="resources.html" data-translate="resources">Resources</a></li>
+        <li><a href="community.html" data-translate="community">Community</a></li>
+      </ul>
     </div>
-</nav>
-  <main>
+  </nav>
+  <main class="container">
     <!-- Learning Path Selector -->
     <section class="learning-paths">
-      <h2>Select a Learning Path</h2>
+      <h2 data-translate="select_learning_path">Select a Learning Path</h2>
       <div class="paths">
-        <button onclick="loadModule('numbers')">Numbers</button>
-        <button onclick="loadModule('colors')">Colors</button>
-        <button onclick="loadModule('shapes')">Shapes</button>
-        <button onclick="loadModule('emotions')">Emotions</button>
-        <button onclick="loadModule('animals')">Animals</button>
-        <button onclick="loadModule('daily')">Daily Routines</button>
-        <button onclick="loadModule('fruits')">Fruits</button>
-        <button onclick="loadModule('vehicles')">Vehicles</button>
-        <button onclick="loadModule('alphabet')">Alphabet</button>
-        <button onclick="loadModule('opposites')">Opposites</button>
-        <button onclick="loadModule('bodyparts')">Body Parts</button>
-        <button onclick="loadModule('yesno')">Yes or No</button>
+        <button onclick="loadModule('numbers')" data-translate="numbers">Numbers</button>
+        <button onclick="loadModule('colors')" data-translate="colors">Colors</button>
+        <button onclick="loadModule('shapes')" data-translate="shapes">Shapes</button>
+        <button onclick="loadModule('emotions')" data-translate="emotions">Emotions</button>
+        <button onclick="loadModule('animals')" data-translate="animals">Animals</button>
+        <button onclick="loadModule('daily')" data-translate="daily_routines">Daily Routines</button>
+        <button onclick="loadModule('fruits')" data-translate="fruits">Fruits</button>
+        <button onclick="loadModule('vehicles')" data-translate="vehicles">Vehicles</button>
+        <button onclick="loadModule('alphabet')" data-translate="alphabet">Alphabet</button>
+        <button onclick="loadModule('opposites')" data-translate="opposites">Opposites</button>
+        <button onclick="loadModule('bodyparts')" data-translate="body_parts">Body Parts</button>
+        <button onclick="loadModule('yesno')" data-translate="yes_no">Yes or No</button>
       </div>
     </section>
 
     <!-- Learning Module -->
     <section class="learning-module">
-      <h2 id="module-title">Let's Learn: Numbers</h2>
-      <p class="instruction" id="instruction">What is 3 + 2?</p>
+      <h2 id="module-title" data-translate="numbers_title">Let's Learn: Numbers</h2>
+      <p class="instruction" id="instruction" data-translate="numbers_instruction">What is 3 + 2?</p>
       <div class="options" id="options">
-        <button onclick="checkAnswer(4)">4</button>
-        <button onclick="checkAnswer(5)">5</button>
-        <button onclick="checkAnswer(6)">6</button>
+        <button onclick="checkAnswer(4)" data-translate="option_4">4</button>
+        <button onclick="checkAnswer(5)" data-translate="option_5">5</button>
+        <button onclick="checkAnswer(6)" data-translate="option_6">6</button>
       </div>
-      <p id="feedback"></p>
+      <p id="feedback" data-translate="feedback"></p>
     </section>
 
     <!-- Reward System -->
     <section class="reward">
-      <h2>Your Stars</h2>
+      <h2 data-translate="your_stars">Your Stars</h2>
       <p id="stars">⭐ 0</p>
     </section>
   </main>
 
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3 data-translate="neurostars">NeuroStars</h3>
+        <ul>
+          <li><a href="about.html" data-translate="about_us">About Us</a></li>
+          <li><a href="about.html#mission" data-translate="our_mission">Our Mission</a></li>
+          <li><a href="contact.html" data-translate="contact">Contact</a></li>
+          <li><a href="support.html" data-translate="support">Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3 data-translate="resources">Resources</h3>
+        <ul>
+          <li><a href="resources.html#parents" data-translate="for_parents">For Parents</a></li>
+          <li><a href="resources.html#educators" data-translate="for_educators">For Educators</a></li>
+          <li><a href="resources.html#research" data-translate="research">Research</a></li>
+          <li><a href="blog.html" data-translate="blog">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3 data-translate="activities">Activities</h3>
+        <ul>
+          <li><a href="games.html" data-translate="games">Games</a></li>
+          <li><a href="learning.html" data-translate="learning_modules">Learning Modules</a></li>
+          <li><a href="assignments.html" data-translate="assignments">Assignments</a></li>
+          <li><a href="tools.html" data-translate="communication_tools">Communication Tools</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3 data-translate="connect">Connect</h3>
+        <ul>
+          <li><a href="community.html" data-translate="community_forum">Community Forum</a></li>
+          <li><a href="events.html" data-translate="events">Events</a></li>
+          <li><a href="newsletter.html" data-translate="newsletter">Newsletter</a></li>
+          <li><a href="feedback.html" data-translate="feedback">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p data-translate="copyright">© 2025 NeuroStars. All rights reserved.</p>
+    </div>
+  </footer>
+
   <script>
+    // Language translations
+    const translations = {
+      english: {
+        learning_title: "Learning Page - NeuroStars",
+        neurostars: "NeuroStars",
+        login_register: "Login / Register",
+        home: "Home",
+        games: "Games",
+        learning: "Learning",
+        assignments: "Assignments",
+        resources: "Resources",
+        community: "Community",
+        select_learning_path: "Select a Learning Path",
+        numbers: "Numbers",
+        colors: "Colors",
+        shapes: "Shapes",
+        emotions: "Emotions",
+        animals: "Animals",
+        daily_routines: "Daily Routines",
+        fruits: "Fruits",
+        vehicles: "Vehicles",
+        alphabet: "Alphabet",
+        opposites: "Opposites",
+        body_parts: "Body Parts",
+        yes_no: "Yes or No",
+        numbers_title: "Let's Learn: Numbers",
+        numbers_instruction: "What is 3 + 2?",
+        option_4: "4",
+        option_5: "5",
+        option_6: "6",
+        feedback: "",
+        feedback_correct: "🎉 Great job! That's correct!",
+        feedback_incorrect: "Try again!",
+        your_stars: "Your Stars",
+        colors_title: "Let's Learn: Colors",
+        colors_instruction: "Which one is red?",
+        option_blue: "Blue",
+        option_red: "Red",
+        option_green: "Green",
+        shapes_title: "Let's Learn: Shapes",
+        shapes_instruction: "Which shape has 3 sides?",
+        option_square: "Square",
+        option_triangle: "Triangle",
+        option_circle: "Circle",
+        emotions_title: "Let's Learn: Emotions",
+        emotions_instruction: "How does this face feel? 😊",
+        option_sad: "Sad",
+        option_angry: "Angry",
+        option_happy: "Happy",
+        animals_title: "Let's Learn: Animals",
+        animals_instruction: "Which one says 'Meow'?",
+        option_dog: "Dog",
+        option_cat: "Cat",
+        option_cow: "Cow",
+        daily_title: "Let's Learn: Daily Routines",
+        daily_instruction: "What do you do after waking up?",
+        option_brush: "Brush Teeth",
+        option_sleep: "Go Back to Sleep",
+        option_play: "Play Games",
+        fruits_title: "Let's Learn: Fruits",
+        fruits_instruction: "Which one is a yellow fruit?",
+        option_apple: "Apple",
+        option_banana: "Banana",
+        option_grapes: "Grapes",
+        vehicles_title: "Let's Learn: Vehicles",
+        vehicles_instruction: "Which one flies in the sky?",
+        option_car: "Car",
+        option_airplane: "Airplane",
+        option_bike: "Bike",
+        alphabet_title: "Let's Learn: Alphabet",
+        alphabet_instruction: "Which letter comes after A?",
+        option_B: "B",
+        option_C: "C",
+        option_D: "D",
+        opposites_title: "Let's Learn: Opposites",
+        opposites_instruction: "What is the opposite of Hot?",
+        option_cold: "Cold",
+        option_warm: "Warm",
+        option_hot: "Hot",
+        body_parts_title: "Let's Learn: Body Parts",
+        body_parts_instruction: "Which part helps you see?",
+        option_ears: "Ears",
+        option_eyes: "Eyes",
+        option_hands: "Hands",
+        yes_no_title: "Let's Learn: Yes or No",
+        yes_no_instruction: "Is the sky green?",
+        option_yes: "Yes",
+        option_no: "No",
+        about_us: "About Us",
+        our_mission: "Our Mission",
+        contact: "Contact",
+        support: "Support",
+        for_parents: "For Parents",
+        for_educators: "For Educators",
+        research: "Research",
+        blog: "Blog",
+        activities: "Activities",
+        learning_modules: "Learning Modules",
+        communication_tools: "Communication Tools",
+        connect: "Connect",
+        community_forum: "Community Forum",
+        events: "Events",
+        newsletter: "Newsletter",
+        feedback: "Feedback",
+        copyright: "© 2025 NeuroStars. All rights reserved."
+      },
+      hindi: {
+        learning_title: "शिक्षा पृष्ठ - न्यूरोस्टार्स",
+        neurostars: "न्यूरोस्टार्स",
+        login_register: "लॉगिन / रजिस्टर",
+        home: "होम",
+        games: "गेम्स",
+        learning: "शिक्षा",
+        assignments: "असाइनमेंट",
+        resources: "संसाधन",
+        community: "समुदाय",
+        select_learning_path: "शिक्षा पथ चुनें",
+        numbers: "संख्याएँ",
+        colors: "रंग",
+        shapes: "आकार",
+        emotions: "भावनाएँ",
+        animals: "जानवर",
+        daily_routines: "दैनिक दिनचर्या",
+        fruits: "फल",
+        vehicles: "वाहन",
+        alphabet: "वर्णमाला",
+        opposites: "विपरीत",
+        body_parts: "शारीरिक अंग",
+        yes_no: "हाँ या नहीं",
+        numbers_title: "आइए सीखें: संख्याएँ",
+        numbers_instruction: "3 + 2 क्या है?",
+        option_4: "4",
+        option_5: "5",
+        option_6: "6",
+        feedback: "",
+        feedback_correct: "🎉 शानदार! यह सही है!",
+        feedback_incorrect: "फिर से कोशिश करें!",
+        your_stars: "आपके तारे",
+        colors_title: "आइए सीखें: रंग",
+        colors_instruction: "कौन सा लाल है?",
+        option_blue: "नीला",
+        option_red: "लाल",
+        option_green: "हरा",
+        shapes_title: "आइए सीखें: आकार",
+        shapes_instruction: "किस आकार की तीन भुजाएँ हैं?",
+        option_square: "वर्ग",
+        option_triangle: "त्रिकोण",
+        option_circle: "वृत्त",
+        emotions_title: "आइए सीखें: भावनाएँ",
+        emotions_instruction: "यह चेहरा कैसा महसूस करता है? 😊",
+        option_sad: "उदास",
+        option_angry: "गुस्सा",
+        option_happy: "खुश",
+        animals_title: "आइए सीखें: जानवर",
+        animals_instruction: "कौन सा 'म्याऊ' बोलता है?",
+        option_dog: "कुत्ता",
+        option_cat: "बिल्ली",
+        option_cow: "गाय",
+        daily_title: "आइए सीखें: दैनिक दिनचर्या",
+        daily_instruction: "जागने के बाद आप क्या करते हैं?",
+        option_brush: "दाँत ब्रश करें",
+        option_sleep: "वापस सो जाएँ",
+        option_play: "खेल खेलें",
+        fruits_title: "आइए सीखें: फल",
+        fruits_instruction: "कौन सा पीला फल है?",
+        option_apple: "सेब",
+        option_banana: "केला",
+        option_grapes: "अंगूर",
+        vehicles_title: "आइए सीखें: वाहन",
+        vehicles_instruction: "कौन सा आकाश में उड़ता है?",
+        option_car: "कार",
+        option_airplane: "हवाई जहाज",
+        option_bike: "साइकिल",
+        alphabet_title: "आइए सीखें: वर्णमाला",
+        alphabet_instruction: "A के बाद कौन सा अक्षर आता है?",
+        option_B: "B",
+        option_C: "C",
+        option_D: "D",
+        opposites_title: "आइए सीखें: विपरीत",
+        opposites_instruction: "गर्म का विपरीत क्या है?",
+        option_cold: "ठंडा",
+        option_warm: "गर्म",
+        option_hot: "गर्म",
+        body_parts_title: "आइए सीखें: शारीरिक अंग",
+        body_parts_instruction: "कौन सा अंग आपको देखने में मदद करता है?",
+        option_ears: "कान",
+        option_eyes: "आँखें",
+        option_hands: "हाथ",
+        yes_no_title: "आइए सीखें: हाँ या नहीं",
+        yes_no_instruction: "क्या आकाश हरा है?",
+        option_yes: "हाँ",
+        option_no: "नहीं",
+        about_us: "हमारे बारे में",
+        our_mission: "हमारा मिशन",
+        contact: "संपर्क",
+        support: "समर्थन",
+        for_parents: "माता-पिता के लिए",
+        for_educators: "शिक्षकों के लिए",
+        research: "अनुसंधान",
+        blog: "ब्लॉग",
+        activities: "गतिविधियाँ",
+        learning_modules: "शिक्षा मॉड्यूल",
+        communication_tools: "संचार उपकरण",
+        connect: "जुड़ें",
+        community_forum: "समुदाय मंच",
+        events: "आयोजन",
+        newsletter: "न्यूज़लेटर",
+        feedback: "प्रतिक्रिया",
+        copyright: "© 2025 न्यूरोस्टार्स। सर्वाधिकार सुरक्षित।"
+      },
+      telugu: {
+        learning_title: "లెర్నింగ్ పేజీ - న్యూరోస్టార్స్",
+        neurostars: "న్యూరోస్టార్స్",
+        login_register: "లాగిన్ / రిజిస్టర్",
+        home: "హోమ్",
+        games: "గేమ్స్",
+        learning: "లెర్నింగ్",
+        assignments: "అసైన్మెంట్లు",
+        resources: "వనరులు",
+        community: "సమాజం",
+        select_learning_path: "లెర్నింగ్ పాత్ ఎంచుకోండి",
+        numbers: "సంఖ్యలు",
+        colors: "రంగులు",
+        shapes: "ఆకారాలు",
+        emotions: "భావోద్వేగాలు",
+        animals: "జంతువులు",
+        daily_routines: "రోజువారీ కార్యక్రమాలు",
+        fruits: "పండ్లు",
+        vehicles: "వాహనాలు",
+        alphabet: "వర్ణమాల",
+        opposites: "వ్యతిరేకతలు",
+        body_parts: "శరీర భాగాలు",
+        yes_no: "అవును లేదా కాదు",
+        numbers_title: "లెట్స్ లెర్న్: సంఖ్యలు",
+        numbers_instruction: "3 + 2 ఎంత?",
+        option_4: "4",
+        option_5: "5",
+        option_6: "6",
+        feedback: "",
+        feedback_correct: "🎉 గొప్ప పని! అది సరైనది!",
+        feedback_incorrect: "మళ్లీ ప్రయత్నించండి!",
+        your_stars: "మీ స్టార్స్",
+        colors_title: "లెట్స్ లెర్న్: రంగులు",
+        colors_instruction: "ఏది ఎరుపు?",
+        option_blue: "నీలం",
+        option_red: "ఎరుపు",
+        option_green: "ఆకుపచ్చ",
+        shapes_title: "లెట్స్ లెర్న్: ఆకారాలు",
+        shapes_instruction: "ఏ ఆకారానికి 3 వైపులు ఉన్నాయి?",
+        option_square: "చతురస్రం",
+        option_triangle: "త్రిభుజం",
+        option_circle: "వృత్తం",
+        emotions_title: "లెట్స్ లెర్న్: భావోద్వేగాలు",
+        emotions_instruction: "ఈ ముఖం ఎలా ఉంది? 😊",
+        option_sad: "విచారం",
+        option_angry: "కోపం",
+        option_happy: "సంతోషం",
+        animals_title: "లెట్స్ లెర్న్: జంతువులు",
+        animals_instruction: "ఏది 'మియావ్' అంటుంది?",
+        option_dog: "కుక్క",
+        option_cat: "పిల్లి",
+        option_cow: "ఆవు",
+        daily_title: "లెట్స్ లెర్న్: రోజువారీ కార్యక్రమాలు",
+        daily_instruction: "మీరు మేల్కొన్న తర్వాత ఏమి చేస్తారు?",
+        option_brush: "పళ్ళు తోముకోవడం",
+        option_sleep: "మళ్లీ నిద్రపోవడం",
+        option_play: "ఆటలు ఆడడం",
+        fruits_title: "లెట్స్ లెర్న్: పండ్లు",
+        fruits_instruction: "ఏది పసుపు రంగు పండు?",
+        option_apple: "ఆపిల్",
+        option_banana: "అరటిపండు",
+        option_grapes: "ద్రాక్షలు",
+        vehicles_title: "లెట్స్ లెర్న్: వాహనాలు",
+        vehicles_instruction: "ఏది ఆకాశంలో ఎగురుతుంది?",
+        option_car: "కారు",
+        option_airplane: "విమానం",
+        option_bike: "సైకిల్",
+        alphabet_title: "లెట్స్ లెర్న్: వర్ణమాల",
+        alphabet_instruction: "A తర్వాత ఏ అక్షరం వస్తుంది?",
+        option_B: "B",
+        option_C: "C",
+        option_D: "D",
+        opposites_title: "లెట్స్ లెర్న్: వ్యతిరేకతలు",
+        opposites_instruction: "వేడి యొక్క వ్యతిరేకత ఏమిటి?",
+        option_cold: "చల్లని",
+        option_warm: "వెచ్చని",
+        option_hot: "వేడి",
+        body_parts_title: "లెట్స్ లెర్న్: శరీర భాగాలు",
+        body_parts_instruction: "ఏ భాగం మీకు చూడడానికి సహాయపడుతుంది?",
+        option_ears: "చెవులు",
+        option_eyes: "కళ్ళు",
+        option_hands: "చేతులు",
+        yes_no_title: "లెట్స్ లెర్న్: అవును లేదా కాదు",
+        yes_no_instruction: "ఆకాశం ఆకుపచ్చగా ఉందా?",
+        option_yes: "అవును",
+        option_no: "కాదు",
+        about_us: "మా గురించి",
+        our_mission: "మా మిషన్",
+        contact: "సంప్రదించండి",
+        support: "మద్దతు",
+        for_parents: "తల్లిదండ్రుల కోసం",
+        for_educators: "ఎడ్యుకేటర్స్ కోసం",
+        research: "పరిశోధన",
+        blog: "బ్లాగ్",
+        activities: "కార్యకలాపాలు",
+        learning_modules: "లెర్నింగ్ మాడ్యూల్స్",
+        communication_tools: "కమ్యూనికేషన్ టూల్స్",
+        connect: "కనెక్ట్",
+        community_forum: "కమ్యూనిటీ ఫోరమ్",
+        events: "ఈవెంట్స్",
+        newsletter: "న్యూస్‌లెటర్",
+        feedback: "ఫీడ్‌బ్యాక్",
+        copyright: "© 2025 న్యూరోస్టార్స్. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి."
+      }
+    };
+
+    // Initialize language
+    let currentLanguage = localStorage.getItem('language') || 'english';
+    document.getElementById('current-language').textContent = translations[currentLanguage].neurostars.split(' ')[0];
+
+    // Update text based on selected language
+    function updateLanguage(lang) {
+      currentLanguage = lang;
+      localStorage.setItem('language', lang);
+      document.getElementById('current-language').textContent = translations[lang].neurostars.split(' ')[0];
+
+      // Update all elements with data-translate attribute
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[lang][key]) {
+          element.textContent = translations[lang][key];
+        }
+      });
+
+      // Update title
+      document.querySelector('title').textContent = translations[lang].learning_title;
+
+      // Update feedback if present
+      const feedback = document.getElementById('feedback');
+      if (feedback.textContent.includes('Great job')) {
+        feedback.textContent = translations[lang].feedback_correct;
+      } else if (feedback.textContent.includes('Try again')) {
+        feedback.textContent = translations[lang].feedback_incorrect;
+      }
+    }
+
+    // Language selector
+    const languageBtn = document.getElementById('language-btn');
+    const languageDropdown = document.getElementById('language-dropdown');
+    const languageOptions = document.querySelectorAll('.language-option');
+
+    languageBtn.addEventListener('click', () => {
+      languageDropdown.classList.toggle('active');
+    });
+
+    languageOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        const lang = option.getAttribute('data-lang');
+        updateLanguage(lang);
+        languageDropdown.classList.remove('active');
+      });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+        languageDropdown.classList.remove('active');
+      }
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
+
+    // Learning module logic
     let starCount = 0;
     let correctAnswer = 5;
 
     function checkAnswer(answer) {
       const feedback = document.getElementById("feedback");
       if (answer === correctAnswer) {
-        feedback.textContent = "🎉 Great job! That's correct!";
+        feedback.textContent = translations[currentLanguage].feedback_correct;
         feedback.style.color = "green";
         starCount++;
         document.getElementById("stars").textContent = `⭐ ${starCount}`;
-        speak("Great job! That's correct!");
+        speak(translations[currentLanguage].feedback_correct);
       } else {
-        feedback.textContent = "Try again!";
+        feedback.textContent = translations[currentLanguage].feedback_incorrect;
         feedback.style.color = "red";
-        speak("Try again");
+        speak(translations[currentLanguage].feedback_incorrect);
       }
     }
 
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
+      // Basic language mapping for speech synthesis
+      utterance.lang = currentLanguage === 'hindi' ? 'hi-IN' : currentLanguage === 'telugu' ? 'te-IN' : 'en-US';
       window.speechSynthesis.speak(utterance);
     }
 
@@ -630,189 +900,134 @@
       const instruction = document.getElementById("instruction");
       const options = document.getElementById("options");
       const feedback = document.getElementById("feedback");
-      feedback.textContent = "";
+      feedback.textContent = translations[currentLanguage].feedback;
 
       switch(module) {
         case 'numbers':
-          title.textContent = "Let's Learn: Numbers";
-          instruction.textContent = "What is 3 + 2?";
+          title.setAttribute('data-translate', 'numbers_title');
+          instruction.setAttribute('data-translate', 'numbers_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer(4)">4</button>
-            <button onclick="checkAnswer(5)">5</button>
-            <button onclick="checkAnswer(6)">6</button>
+            <button onclick="checkAnswer(4)" data-translate="option_4">${translations[currentLanguage].option_4}</button>
+            <button onclick="checkAnswer(5)" data-translate="option_5">${translations[currentLanguage].option_5}</button>
+            <button onclick="checkAnswer(6)" data-translate="option_6">${translations[currentLanguage].option_6}</button>
           `;
           correctAnswer = 5;
           break;
         case 'colors':
-          title.textContent = "Let's Learn: Colors";
-          instruction.textContent = "Which one is red?";
+          title.setAttribute('data-translate', 'colors_title');
+          instruction.setAttribute('data-translate', 'colors_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('blue')">Blue</button>
-            <button onclick="checkAnswer('red')">Red</button>
-            <button onclick="checkAnswer('green')">Green</button>
+            <button onclick="checkAnswer('blue')" data-translate="option_blue">${translations[currentLanguage].option_blue}</button>
+            <button onclick="checkAnswer('red')" data-translate="option_red">${translations[currentLanguage].option_red}</button>
+            <button onclick="checkAnswer('green')" data-translate="option_green">${translations[currentLanguage].option_green}</button>
           `;
           correctAnswer = 'red';
           break;
         case 'shapes':
-          title.textContent = "Let's Learn: Shapes";
-          instruction.textContent = "Which shape has 3 sides?";
+          title.setAttribute('data-translate', 'shapes_title');
+          instruction.setAttribute('data-translate', 'shapes_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('square')">Square</button>
-            <button onclick="checkAnswer('triangle')">Triangle</button>
-            <button onclick="checkAnswer('circle')">Circle</button>
+            <button onclick="checkAnswer('square')" data-translate="option_square">${translations[currentLanguage].option_square}</button>
+            <button onclick="checkAnswer('triangle')" data-translate="option_triangle">${translations[currentLanguage].option_triangle}</button>
+            <button onclick="checkAnswer('circle')" data-translate="option_circle">${translations[currentLanguage].option_circle}</button>
           `;
           correctAnswer = 'triangle';
           break;
         case 'emotions':
-          title.textContent = "Let's Learn: Emotions";
-          instruction.textContent = "How does this face feel? 😊";
+          title.setAttribute('data-translate', 'emotions_title');
+          instruction.setAttribute('data-translate', 'emotions_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('sad')">Sad</button>
-            <button onclick="checkAnswer('angry')">Angry</button>
-            <button onclick="checkAnswer('happy')">Happy</button>
+            <button onclick="checkAnswer('sad')" data-translate="option_sad">${translations[currentLanguage].option_sad}</button>
+            <button onclick="checkAnswer('angry')" data-translate="option_angry">${translations[currentLanguage].option_angry}</button>
+            <button onclick="checkAnswer('happy')" data-translate="option_happy">${translations[currentLanguage].option_happy}</button>
           `;
           correctAnswer = 'happy';
           break;
         case 'animals':
-          title.textContent = "Let's Learn: Animals";
-          instruction.textContent = "Which one says 'Meow'?";
+          title.setAttribute('data-translate', 'animals_title');
+          instruction.setAttribute('data-translate', 'animals_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('dog')">Dog</button>
-            <button onclick="checkAnswer('cat')">Cat</button>
-            <button onclick="checkAnswer('cow')">Cow</button>
+            <button onclick="checkAnswer('dog')" data-translate="option_dog">${translations[currentLanguage].option_dog}</button>
+            <button onclick="checkAnswer('cat')" data-translate="option_cat">${translations[currentLanguage].option_cat}</button>
+            <button onclick="checkAnswer('cow')" data-translate="option_cow">${translations[currentLanguage].option_cow}</button>
           `;
           correctAnswer = 'cat';
           break;
         case 'daily':
-          title.textContent = "Let's Learn: Daily Routines";
-          instruction.textContent = "What do you do after waking up?";
+          title.setAttribute('data-translate', 'daily_title');
+          instruction.setAttribute('data-translate', 'daily_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('brush')">Brush Teeth</button>
-            <button onclick="checkAnswer('sleep')">Go Back to Sleep</button>
-            <button onclick="checkAnswer('play')">Play Games</button>
+            <button onclick="checkAnswer('brush')" data-translate="option_brush">${translations[currentLanguage].option_brush}</button>
+            <button onclick="checkAnswer('sleep')" data-translate="option_sleep">${translations[currentLanguage].option_sleep}</button>
+            <button onclick="checkAnswer('play')" data-translate="option_play">${translations[currentLanguage].option_play}</button>
           `;
           correctAnswer = 'brush';
           break;
         case 'fruits':
-          title.textContent = "Let's Learn: Fruits";
-          instruction.textContent = "Which one is a yellow fruit?";
+          title.setAttribute('data-translate', 'fruits_title');
+          instruction.setAttribute('data-translate', 'fruits_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('apple')">Apple</button>
-            <button onclick="checkAnswer('banana')">Banana</button>
-            <button onclick="checkAnswer('grapes')">Grapes</button>
+            <button onclick="checkAnswer('apple')" data-translate="option_apple">${translations[currentLanguage].option_apple}</button>
+            <button onclick="checkAnswer('banana')" data-translate="option_banana">${translations[currentLanguage].option_banana}</button>
+            <button onclick="checkAnswer('grapes')" data-translate="option_grapes">${translations[currentLanguage].option_grapes}</button>
           `;
           correctAnswer = 'banana';
           break;
         case 'vehicles':
-          title.textContent = "Let's Learn: Vehicles";
-          instruction.textContent = "Which one flies in the sky?";
+          title.setAttribute('data-translate', 'vehicles_title');
+          instruction.setAttribute('data-translate', 'vehicles_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('car')">Car</button>
-            <button onclick="checkAnswer('airplane')">Airplane</button>
-            <button onclick="checkAnswer('bike')">Bike</button>
+            <button onclick="checkAnswer('car')" data-translate="option_car">${translations[currentLanguage].option_car}</button>
+            <button onclick="checkAnswer('airplane')" data-translate="option_airplane">${translations[currentLanguage].option_airplane}</button>
+            <button onclick="checkAnswer('bike')" data-translate="option_bike">${translations[currentLanguage].option_bike}</button>
           `;
           correctAnswer = 'airplane';
           break;
         case 'alphabet':
-          title.textContent = "Let's Learn: Alphabet";
-          instruction.textContent = "Which letter comes after A?";
+          title.setAttribute('data-translate', 'alphabet_title');
+          instruction.setAttribute('data-translate', 'alphabet_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('B')">B</button>
-            <button onclick="checkAnswer('C')">C</button>
-            <button onclick="checkAnswer('D')">D</button>
+            <button onclick="checkAnswer('B')" data-translate="option_B">${translations[currentLanguage].option_B}</button>
+            <button onclick="checkAnswer('C')" data-translate="option_C">${translations[currentLanguage].option_C}</button>
+            <button onclick="checkAnswer('D')" data-translate="option_D">${translations[currentLanguage].option_D}</button>
           `;
           correctAnswer = 'B';
           break;
         case 'opposites':
-          title.textContent = "Let's Learn: Opposites";
-          instruction.textContent = "What is the opposite of Hot?";
+          title.setAttribute('data-translate', 'opposites_title');
+          instruction.setAttribute('data-translate', 'opposites_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('cold')">Cold</button>
-            <button onclick="checkAnswer('warm')">Warm</button>
-            <button onclick="checkAnswer('hot')">Hot</button>
+            <button onclick="checkAnswer('cold')" data-translate="option_cold">${translations[currentLanguage].option_cold}</button>
+            <button onclick="checkAnswer('warm')" data-translate="option_warm">${translations[currentLanguage].option_warm}</button>
+            <button onclick="checkAnswer('hot')" data-translate="option_hot">${translations[currentLanguage].option_hot}</button>
           `;
           correctAnswer = 'cold';
           break;
         case 'bodyparts':
-          title.textContent = "Let's Learn: Body Parts";
-          instruction.textContent = "Which part helps you see?";
+          title.setAttribute('data-translate', 'body_parts_title');
+          instruction.setAttribute('data-translate', 'body_parts_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('ears')">Ears</button>
-            <button onclick="checkAnswer('eyes')">Eyes</button>
-            <button onclick="checkAnswer('hands')">Hands</button>
+            <button onclick="checkAnswer('ears')" data-translate="option_ears">${translations[currentLanguage].option_ears}</button>
+            <button onclick="checkAnswer('eyes')" data-translate="option_eyes">${translations[currentLanguage].option_eyes}</button>
+            <button onclick="checkAnswer('hands')" data-translate="option_hands">${translations[currentLanguage].option_hands}</button>
           `;
           correctAnswer = 'eyes';
           break;
         case 'yesno':
-          title.textContent = "Let's Learn: Yes or No";
-          instruction.textContent = "Is the sky green?";
+          title.setAttribute('data-translate', 'yes_no_title');
+          instruction.setAttribute('data-translate', 'yes_no_instruction');
           options.innerHTML = `
-            <button onclick="checkAnswer('yes')">Yes</button>
-            <button onclick="checkAnswer('no')">No</button>
+            <button onclick="checkAnswer('yes')" data-translate="option_yes">${translations[currentLanguage].option_yes}</button>
+            <button onclick="checkAnswer('no')" data-translate="option_no">${translations[currentLanguage].option_no}</button>
           `;
           correctAnswer = 'no';
           break;
       }
+      updateLanguage(currentLanguage);
     }
+
+    // Initialize language on page load
+    updateLanguage(currentLanguage);
   </script>
 </body>
 </html>
-
-<!-- CSS: style.css -->
-<style>
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #ffffff;
-    color: #000000;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-  }
-
-  header h1 {
-    color: #000000;
-  }
-
-  .learning-module, .reward, .learning-paths {
-    background-color: #ffffff;
-    border: 2px solid #000;
-    border-radius: 20px;
-    padding: 20px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 500px;
-  }
-
-  .instruction {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-  }
-
-  .options button, .paths button {
-    font-size: 1.2em;
-    padding: 10px 20px;
-    margin: 10px;
-    border: 2px solid #000;
-    border-radius: 12px;
-    background-color: #fff;
-    color: #000;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-
-  .options button:hover, .paths button:hover {
-    background-color: #000;
-    color: #fff;
-  }
-
-  #feedback {
-    font-size: 1.2em;
-    margin-top: 20px;
-    font-weight: bold;
-  }
-
-  #stars {
-    font-size: 2em;
-    color: #000;
-  }
-</style>
