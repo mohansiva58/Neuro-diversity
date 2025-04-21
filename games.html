@@ -1,10 +1,10 @@
-<!-- games.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games & Activities - NeuroStars</title>
+    <title data-translate="games_activities_title">Games & Activities - NeuroStars</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         :root {
             --primary: black;
@@ -16,7 +16,7 @@
             --shadow: rgba(0, 0, 0, 0.1);
             --nav-bg: white;
         }
-    
+
         .dark-mode {
             --primary: white;
             --secondary: #ccc;
@@ -27,21 +27,21 @@
             --shadow: rgba(255, 255, 255, 0.1);
             --nav-bg: #222;
         }
-    
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             transition: background-color 0.3s, color 0.3s;
         }
-    
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--background);
             color: var(--text);
             line-height: 1.6;
         }
-    
+
         header {
             background: var(--primary);
             color: var(--background);
@@ -51,15 +51,15 @@
             z-index: 100;
             box-shadow: 0 2px 10px var(--shadow);
         }
-    
+
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: space Ascending;
             align-items: center;
         }
-    
+
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
@@ -67,313 +67,273 @@
             align-items: center;
             gap: 0.5rem;
         }
-    
+
         .logo-icon {
             font-size: 2rem;
         }
-    
+
         .controls {
             display: flex;
             gap: 1rem;
             align-items: center;
         }
-    
+
         .btn {
             background-color: var(--background);
             color: var(--primary);
             border: 1px solid var(--primary);
             padding: 0.5rem 1rem;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 0.3rem;
             box-shadow: 0 2px 5px var(--shadow);
+            transition: all 0.3s ease;
         }
-    
+
         .btn:hover {
             background-color: var(--primary);
             color: var(--background);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px var(--shadow);
+            box-shadow: 0 4px 10px var(--shadow);
         }
-    
+
         #dark-mode-toggle {
             background-color: transparent;
             border: none;
             color: var(--background);
             cursor: pointer;
             font-size: 1.5rem;
-            padding: 0.3rem;
+            padding: 0.5rem;
             border-radius: 50%;
+            transition: all 0.3s ease;
         }
-    
+
         #dark-mode-toggle:hover {
             background-color: rgba(255, 255, 255, 0.2);
         }
-    
+
         nav {
             background-color: var(--nav-bg);
             color: var(--text);
-            padding: 0.5rem 0;
+            padding: 0.75rem 0;
             box-shadow: 0 2px 5px var(--shadow);
         }
-    
+
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
         }
-    
+
         .nav-links {
             display: flex;
             list-style: none;
             gap: 1.5rem;
         }
-    
+
         .nav-links a {
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
-            padding: 0.5rem;
-            border-radius: 5px;
-            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
-    
-        .nav-links a:hover {
+
+        .nav-links a:hover,
+        .nav-links a.active {
             background-color: var(--primary);
             color: var(--background);
         }
-    
+
         .container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
-    
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/api/placeholder/1200/400") no-repeat center center;
-            background-size: cover;
-            color: var(--background);
+
+        .page-header {
             text-align: center;
-            padding: 5rem 2rem;
-            border-radius: 10px;
             margin-bottom: 2rem;
-            box-shadow: 0 5px 15px var(--shadow);
         }
-    
-        .hero h1 {
+
+        .page-header h1 {
             font-size: 2.5rem;
+            color: var(--primary);
             margin-bottom: 1rem;
         }
-    
-        .hero p {
+
+        .page-header p {
             font-size: 1.2rem;
             max-width: 800px;
-            margin: 0 auto 2rem;
+            margin: 0 auto;
         }
-    
-        .hero-buttons {
+
+        .category-tabs {
             display: flex;
             justify-content: center;
             gap: 1rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-    
-        .btn-large {
-            padding: 0.8rem 2rem;
-            font-size: 1.1rem;
-            border-radius: 30px;
-        }
-    
-        .btn-primary {
-            background-color: var(--background);
-            color: var(--primary);
+
+        .category-tab {
+            background-color: var(--card-bg);
+            color: var(--text);
             border: 1px solid var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
-    
-        .btn-primary:hover {
+
+        .category-tab:hover,
+        .category-tab.active {
             background-color: var(--primary);
             color: var(--background);
+            box-shadow: 0 2px 5px var(--shadow);
         }
-    
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--background);
-            border: 2px solid var(--background);
-        }
-    
-        .btn-secondary:hover {
-            background-color: var(--background);
-            color: var(--primary);
-        }
-    
-        .features {
+
+        .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-    
-        .feature-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px var(--shadow);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-    
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-    
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-    
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-    
-        .activities {
-            margin-bottom: 3rem;
-        }
-    
-        .activities h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
-        }
-    
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
-    
-        .activity-card {
+
+        .game-card {
             background-color: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px var(--shadow);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
         }
-    
-        .activity-card:hover {
+
+        .game-card:hover {
             transform: translateY(-5px);
         }
-    
-        .activity-img {
+
+        .game-preview {
             height: 180px;
             background-color: var(--secondary);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--background);
-            font-size: 2rem;
+            font-size: 3rem;
         }
-    
-        .activity-content {
+
+        .game-info {
             padding: 1.5rem;
         }
-    
-        .activity-content h3 {
-            margin-bottom: 0.5rem;
+
+        .game-info h3 {
             color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
         }
-    
-        .testimonials {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 5px 15px var(--shadow);
+
+        .game-info p {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
-    
-        .testimonials h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
-        }
-    
-        .testimonial-slider {
-            overflow: hidden;
-            position: relative;
-            height: 200px;
-        }
-    
-        .testimonial {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-    
-        .testimonial.active {
-            opacity: 1;
-        }
-    
-        .testimonial-text {
-            font-style: italic;
+
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
             margin-bottom: 1rem;
         }
-    
-        .testimonial-author {
-            font-weight: bold;
+
+        .tag {
+            background-color: var(--secondary);
+            color: var(--background);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .play-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .game-container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .game-container.hidden {
+            display: none;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-header h2 {
             color: var(--primary);
         }
-    
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         .language-selector {
             position: relative;
         }
-    
+
         .language-dropdown {
             position: absolute;
             top: 100%;
             right: 0;
             background-color: var(--background);
             color: var(--text);
-            border-radius: 5px;
+            border-radius: 10px;
             box-shadow: 0 5px 15px var(--shadow);
             padding: 0.5rem;
-            display: none;
+            min-width: 120px;
             z-index: 200;
+            display: none;
         }
-    
+
         .language-dropdown.active {
             display: block;
         }
-    
+
         .language-option {
             padding: 0.5rem 1rem;
             cursor: pointer;
-            white-space: nowrap;
-        }
-    
-        .language-option:hover {
-            background-color: #f0f0f0;
             border-radius: 5px;
+            transition: all 0.2s ease;
         }
-    
-        .dark-mode .language-option:hover {
-            background-color: #333;
+
+        .language-option:hover {
+            background-color: var(--primary);
             color: var(--background);
         }
-    
+
         footer {
             background-color: var(--nav-bg);
             color: var(--text);
-            padding: 2rem 0;
-            margin-top: 2rem;
+            padding: 3rem 0;
+            margin-top: 3rem;
         }
-    
+
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -382,88 +342,88 @@
             gap: 2rem;
             padding: 0 1rem;
         }
-    
+
         .footer-column h3 {
+            color: var(--primary);
             margin-bottom: 1rem;
             border-bottom: 2px solid var(--accent);
             padding-bottom: 0.5rem;
-            display: inline-block;
-            color: var(--primary);
         }
-    
+
         .footer-column ul {
             list-style: none;
         }
-    
+
         .footer-column ul li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
-    
+
         .footer-column a {
             color: var(--text);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
-    
+
         .footer-column a:hover {
             color: var(--accent);
         }
-    
+
         .copyright {
             text-align: center;
             padding-top: 2rem;
             margin-top: 2rem;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
         }
-    
+
         .dark-mode .copyright {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-    
+
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
                 gap: 1rem;
             }
-    
+
             .controls {
                 width: 100%;
                 justify-content: center;
+                flex-wrap: wrap;
             }
-    
+
             .nav-container {
                 flex-direction: column;
                 align-items: center;
             }
-    
+
             .nav-links {
                 margin-top: 1rem;
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 1rem;
             }
-    
-            .hero h1 {
+
+            .page-header h1 {
                 font-size: 2rem;
             }
-    
-            .hero p {
+
+            .page-header p {
                 font-size: 1rem;
             }
         }
     </style>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="styles/games.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <!-- Same header as index.html -->
         <div class="header-container">
             <div class="logo">
                 <span class="logo-icon">✨</span>
-                <span>NeuroStars</span>
+                <span data-translate="neurostars">NeuroStars</span>
             </div>
             <div class="controls">
-                <button id="dark-mode-toggle">🌙</button>
+                <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
                 <div class="language-selector">
                     <button class="btn" id="language-btn">
                         <span id="current-language">English</span>
@@ -475,7 +435,7 @@
                         <div class="language-option" data-lang="telugu">తెలుగు</div>
                     </div>
                 </div>
-                <a href="login.html" class="btn">Login / Register</a>
+                <a href="login.html" class="btn" data-translate="login_register">Login / Register</a>
             </div>
         </div>
     </header>
@@ -483,30 +443,30 @@
     <nav>
         <div class="nav-container">
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="games.html" class="active">Games</a></li>
-                <li><a href="learning.html">Learning</a></li>
-                <li><a href="assignments.html">Assignments</a></li>
-                <li><a href="resources.html">Resources</a></li>
-                <li><a href="community.html">Community</a></li>
+                <li><a href="index.html" data-translate="home">Home</a></li>
+                <li><a href="games.html" class="active" data-translate="games">Games</a></li>
+                <li><a href="learning.html" data-translate="learning">Learning</a></li>
+                <li><a href="assignments.html" data-translate="assignments">Assignments</a></li>
+                <li><a href="resources.html" data-translate="resources">Resources</a></li>
+                <li><a href="community.html" data-translate="community">Community</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
         <section class="page-header">
-            <h1>Games & Activities</h1>
-            <p>Fun, interactive games designed specifically for neurodivergent children to support learning and development.</p>
+            <h1 data-translate="games_activities">Games & Activities</h1>
+            <p data-translate="games_activities_desc">Fun, interactive games designed specifically for neurodivergent children to support learning and development.</p>
         </section>
 
         <section class="game-categories">
             <div class="category-tabs">
-                <button class="category-tab active" data-category="all">All Games</button>
-                <button class="category-tab" data-category="puzzles">Puzzles</button>
-                <button class="category-tab" data-category="emotions">Emotions</button>
-                <button class="category-tab" data-category="art">Art & Creativity</button>
-                <button class="category-tab" data-category="language">Language</button>
-                <button class="category-tab" data-category="motor">Motor Skills</button>
+                <button class="category-tab active" data-category="all" data-translate="all_games">All Games</button>
+                <button class="category-tab" data-category="puzzles" data-translate="puzzles">Puzzles</button>
+                <button class="category-tab" data-category="emotions" data-translate="emotions">Emotions</button>
+                <button class="category-tab" data-category="art" data-translate="art_creativity">Art & Creativity</button>
+                <button class="category-tab" data-category="language" data-translate="language">Language</button>
+                <button class="category-tab" data-category="motor" data-translate="motor_skills">Motor Skills</button>
             </div>
         </section>
 
@@ -517,13 +477,13 @@
                     <i class="fas fa-puzzle-piece"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Pattern Matching</h3>
-                    <p>Match patterns by color, shape, and size with increasingly challenging levels.</p>
+                    <h3 data-translate="pattern_matching">Pattern Matching</h3>
+                    <p data-translate="pattern_matching_desc">Match patterns by color, shape, and size with increasingly challenging levels.</p>
                     <div class="game-tags">
-                        <span class="tag">Ages 4-8</span>
-                        <span class="tag">Visual Skills</span>
+                        <span class="tag" data-translate="ages_4_8">Ages 4-8</span>
+                        <span class="tag" data-translate="visual_skills">Visual Skills</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('pattern-matching')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('pattern-matching')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
 
@@ -532,13 +492,13 @@
                     <i class="fas fa-th"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Memory Tiles</h3>
-                    <p>Flip and match tiles to find pairs in this memory-enhancing game.</p>
+                    <h3 data-translate="memory_tiles">Memory Tiles</h3>
+                    <p data-translate="memory_tiles_desc">Flip and match tiles to find pairs in this memory-enhancing game.</p>
                     <div class="game-tags">
-                        <span class="tag">Ages 5+</span>
-                        <span class="tag">Memory</span>
+                        <span class="tag" data-translate="ages_5_plus">Ages 5+</span>
+                        <span class="tag" data-translate="memory">Memory</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('memory-tiles')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('memory-tiles')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
 
@@ -548,13 +508,13 @@
                     <i class="fas fa-smile"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Emotion Explorer</h3>
-                    <p>Learn to recognize facial expressions and match them to emotions.</p>
+                    <h3 data-translate="emotion_explorer">Emotion Explorer</h3>
+                    <p data-translate="emotion_explorer_desc">Learn to recognize facial expressions and match them to emotions.</p>
                     <div class="game-tags">
-                        <span class="tag">Ages 3-7</span>
-                        <span class="tag">Social Skills</span>
+                        <span class="tag" data-translate="ages_3_7">Ages 3-7</span>
+                        <span class="tag" data-translate="social_skills">Social Skills</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('emotion-explorer')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('emotion-explorer')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
 
@@ -563,13 +523,13 @@
                     <i class="fas fa-theater-masks"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Situation Station</h3>
-                    <p>Understand appropriate emotional responses to different situations.</p>
+                    <h3 data-translate="situation_station">Situation Station</h3>
+                    <p data-translate="situation_station_desc">Understand appropriate emotional responses to different situations.</p>
                     <div class="game-tags">
-                        <span class="tag">Ages 6-10</span>
-                        <span class="tag">Social Understanding</span>
+                        <span class="tag" data-translate="ages_6_10">Ages 6-10</span>
+                        <span class="tag" data-translate="social_understanding">Social Understanding</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('situation-station')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('situation-station')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
 
@@ -579,13 +539,13 @@
                     <i class="fas fa-palette"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Sensory Art Studio</h3>
-                    <p>Creative digital art studio with calming sounds and visual effects.</p>
+                    <h3 data-translate="sensory_art_studio">Sensory Art Studio</h3>
+                    <p data-translate="sensory_art_studio_desc">Creative digital art studio with calming sounds and visual effects.</p>
                     <div class="game-tags">
-                        <span class="tag">All Ages</span>
-                        <span class="tag">Self-Expression</span>
+                        <span class="tag" data-translate="all_ages">All Ages</span>
+                        <span class="tag" data-translate="self_expression">Self-Expression</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('sensory-art')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('sensory-art')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
 
@@ -594,13 +554,13 @@
                     <i class="fas fa-pencil-alt"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Doodle World</h3>
-                    <p>Follow guided drawing activities to create fun pictures and scenes.</p>
+                    <h3 data-translate="doodle_world">Doodle World</h3>
+                    <p data-translate="doodle_world_desc">Follow guided drawing activities to create fun pictures and scenes.</p>
                     <div class="game-tags">
-                        <span class="tag">Ages 4+</span>
-                        <span class="tag">Fine Motor</span>
+                        <span class="tag" data-translate="ages_4_plus">Ages 4+</span>
+                        <span class="tag" data-translate="fine_motor">Fine Motor</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('doodle-world')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('doodle-world')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
 
@@ -610,13 +570,13 @@
                     <i class="fas fa-font"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Word Builder</h3>
-                    <p>Create words from letters with visual and audio support.</p>
+                    <h3 data-translate="word_builder">Word Builder</h3>
+                    <p data-translate="word_builder_desc">Create words from letters with visual and audio support.</p>
                     <div class="game-tags">
-                        <span class="tag">Ages 5-9</span>
-                        <span class="tag">Literacy</span>
+                        <span class="tag" data-translate="ages_5_9">Ages 5-9</span>
+                        <span class="tag" data-translate="literacy">Literacy</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('word-builder')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('word-builder')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
 
@@ -625,13 +585,13 @@
                     <i class="fas fa-book"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Story Maker</h3>
-                    <p>Create visual stories by selecting characters, settings, and actions.</p>
+                    <h3 data-translate="story_maker">Story Maker</h3>
+                    <p data-translate="story_maker_desc">Create visual stories by selecting characters, settings, and actions.</p>
                     <div class="game-tags">
-                        <span class="tag">Ages 6+</span>
-                        <span class="tag">Narrative Skills</span>
+                        <span class="tag" data-translate="ages_6_plus">Ages 6+</span>
+                        <span class="tag" data-translate="narrative_skills">Narrative Skills</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('story-maker')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('story-maker')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
 
@@ -641,13 +601,13 @@
                     <i class="fas fa-hand-pointer"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Bubble Pop</h3>
-                    <p>Pop virtual bubbles to practice precise movements and timing.</p>
+                    <h3 data-translate="bubble_pop">Bubble Pop</h3>
+                    <p data-translate="bubble_pop_desc">Pop virtual bubbles to practice precise movements and timing.</p>
                     <div class="game-tags">
-                        <span class="tag">Ages 3+</span>
-                        <span class="tag">Fine Motor</span>
+                        <span class="tag" data-translate="ages_3_plus">Ages 3+</span>
+                        <span class="tag" data-translate="fine_motor">Fine Motor</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('bubble-pop')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('bubble-pop')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
 
@@ -656,13 +616,13 @@
                     <i class="fas fa-shapes"></i>
                 </div>
                 <div class="game-info">
-                    <h3>Shape Sorter</h3>
-                    <p>Drag and drop shapes into matching outlines with increasing difficulty.</p>
+                    <h3 data-translate="shape_sorter">Shape Sorter</h3>
+                    <p data-translate="shape_sorter_desc">Drag and drop shapes into matching outlines with increasing difficulty.</p>
                     <div class="game-tags">
-                        <span class="tag">Ages 3-7</span>
-                        <span class="tag">Spatial Skills</span>
+                        <span class="tag" data-translate="ages_3_7">Ages 3-7</span>
+                        <span class="tag" data-translate="spatial_skills">Spatial Skills</span>
                     </div>
-                    <button class="btn play-btn" onclick="loadGame('shape-sorter')">Play Now</button>
+                    <button class="btn play-btn" onclick="loadGame('shape-sorter')" data-translate="play_now">Play Now</button>
                 </div>
             </div>
         </section>
@@ -677,51 +637,362 @@
     </div>
 
     <footer>
-        <!-- Same footer as index.html -->
         <div class="footer-container">
             <div class="footer-column">
-                <h3>NeuroStars</h3>
+                <h3 data-translate="neurostars">NeuroStars</h3>
                 <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="about.html#mission">Our Mission</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="support.html">Support</a></li>
+                    <li><a href="about.html" data-translate="about_us">About Us</a></li>
+                    <li><a href="about.html#mission" data-translate="our_mission">Our Mission</a></li>
+                    <li><a href="contact.html" data-translate="contact">Contact</a></li>
+                    <li><a href="support.html" data-translate="support">Support</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Resources</h3>
+                <h3 data-translate="resources">Resources</h3>
                 <ul>
-                    <li><a href="resources.html#parents">For Parents</a></li>
-                    <li><a href="resources.html#educators">For Educators</a></li>
-                    <li><a href="resources.html#research">Research</a></li>
-                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="resources.html#parents" data-translate="for_parents">For Parents</a></li>
+                    <li><a href="resources.html#educators" data-translate="for_educators">For Educators</a></li>
+                    <li><a href="resources.html#research" data-translate="research">Research</a></li>
+                    <li><a href="blog.html" data-translate="blog">Blog</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Activities</h3>
+                <h3 data-translate="activities">Activities</h3>
                 <ul>
-                    <li><a href="games.html">Games</a></li>
-                    <li><a href="learning.html">Learning Modules</a></li>
-                    <li><a href="assignments.html">Assignments</a></li>
-                    <li><a href="tools.html">Communication Tools</a></li>
+                    <li><a href="games.html" data-translate="games">Games</a></li>
+                    <li><a href="learning.html" data-translate="learning_modules">Learning Modules</a></li>
+                    <li><a href="assignments.html" data-translate="assignments">Assignments</a></li>
+                    <li><a href="tools.html" data-translate="communication_tools">Communication Tools</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Connect</h3>
+                <h3 data-translate="connect">Connect</h3>
                 <ul>
-                    <li><a href="community.html">Community Forum</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="newsletter.html">Newsletter</a></li>
-                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="community.html" data-translate="community_forum">Community Forum</a></li>
+                    <li><a href="events.html" data-translate="events">Events</a></li>
+                    <li><a href="newsletter.html" data-translate="newsletter">Newsletter</a></li>
+                    <li><a href="feedback.html" data-translate="feedback">Feedback</a></li>
                 </ul>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2025 NeuroStars. All rights reserved.</p>
+            <p data-translate="copyright">© 2025 NeuroStars. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="scripts/common.js"></script>
-    <script src="scripts/games.js"></script>
+    <script>
+        // Language translations
+        const translations = {
+            english: {
+                neurostars: "NeuroStars",
+                login_register: "Login / Register",
+                home: "Home",
+                games: "Games",
+                learning: "Learning",
+                assignments: "Assignments",
+                resources: "Resources",
+                community: "Community",
+                games_activities: "Games & Activities",
+                games_activities_desc: "Fun, interactive games designed specifically for neurodivergent children to support learning and development.",
+                all_games: "All Games",
+                puzzles: "Puzzles",
+                emotions: "Emotions",
+                art_creativity: "Art & Creativity",
+                language: "Language",
+                motor_skills: "Motor Skills",
+                pattern_matching: "Pattern Matching",
+                pattern_matching_desc: "Match patterns by color, shape, and size with increasingly challenging levels.",
+                ages_4_8: "Ages 4-8",
+                visual_skills: "Visual Skills",
+                play_now: "Play Now",
+                memory_tiles: "Memory Tiles",
+                memory_tiles_desc: "Flip and match tiles to find pairs in this memory-enhancing game.",
+                ages_5_plus: "Ages 5+",
+                memory: "Memory",
+                emotion_explorer: "Emotion Explorer",
+                emotion_explorer_desc: "Learn to recognize facial expressions and match them to emotions.",
+                ages_3_7: "Ages 3-7",
+                social_skills: "Social Skills",
+                situation_station: "Situation Station",
+                situation_station_desc: "Understand appropriate emotional responses to different situations.",
+                ages_6_10: "Ages 6-10",
+                social_understanding: "Social Understanding",
+                sensory_art_studio: "Sensory Art Studio",
+                sensory_art_studio_desc: "Creative digital art studio with calming sounds and visual effects.",
+                all_ages: "All Ages",
+                self_expression: "Self-Expression",
+                doodle_world: "Doodle World",
+                doodle_world_desc: "Follow guided drawing activities to create fun pictures and scenes.",
+                ages_4_plus: "Ages 4+",
+                fine_motor: "Fine Motor",
+                word_builder: "Word Builder",
+                word_builder_desc: "Create words from letters with visual and audio support.",
+                ages_5_9: "Ages 5-9",
+                literacy: "Literacy",
+                story_maker: "Story Maker",
+                story_maker_desc: "Create visual stories by selecting characters, settings, and actions.",
+                ages_6_plus: "Ages 6+",
+                narrative_skills: "Narrative Skills",
+                bubble_pop: "Bubble Pop",
+                bubble_pop_desc: "Pop virtual bubbles to practice precise movements and timing.",
+                ages_3_plus: "Ages 3+",
+                shape_sorter: "Shape Sorter",
+                shape_sorter_desc: "Drag and drop shapes into matching outlines with increasing difficulty.",
+                spatial_skills: "Spatial Skills",
+                about_us: "About Us",
+                our_mission: "Our Mission",
+                contact: "Contact",
+                support: "Support",
+                for_parents: "For Parents",
+                for_educators: "For Educators",
+                research: "Research",
+                blog: "Blog",
+                activities: "Activities",
+                learning_modules: "Learning Modules",
+                communication_tools: "Communication Tools",
+                connect: "Connect",
+                community_forum: "Community Forum",
+                events: "Events",
+                newsletter: "Newsletter",
+                feedback: "Feedback",
+                copyright: "© 2025 NeuroStars. All rights reserved."
+            },
+            hindi: {
+                neurostars: "न्यूरोस्टार्स",
+                login_register: "लॉगिन / रजिस्टर",
+                home: "होम",
+                games: "गेम्स",
+                learning: "शिक्षा",
+                assignments: "असाइनमेंट",
+                resources: "संसाधन",
+                community: "समुदाय",
+                games_activities: "गेम्स और गतिविधियाँ",
+                games_activities_desc: "न्यूरोडायवर्जेंट बच्चों के लिए विशेष रूप से डिज़ाइन किए गए मजेदार, इंटरैक्टिव गेम्स जो सीखने और विकास का समर्थन करते हैं।",
+                all_games: "सभी गेम्स",
+                puzzles: "पहेलियाँ",
+                emotions: "भावनाएँ",
+                art_creativity: "कला और रचनात्मकता",
+                language: "भाषा",
+                motor_skills: "मोटर कौशल",
+                pattern_matching: "पैटर्न मिलान",
+                pattern_matching_desc: "रंग, आकार और आकार के आधार पर पैटर्न मिलाएँ, जो धीरे-धीरे अधिक चुनौतीपूर्ण होते हैं।",
+                ages_4_8: "आयु 4-8",
+                visual_skills: "दृश्य कौशल",
+                play_now: "अब खेलें",
+                memory_tiles: "मेमोरी टाइल्स",
+                memory_tiles_desc: "इस मेमोरी बढ़ाने वाले गेम में टाइल्स को पलटें और जोड़े ढूंढें।",
+                ages_5_plus: "आयु 5+",
+                memory: "मेमोरी",
+                emotion_explorer: "भावना खोजकर्ता",
+                emotion_explorer_desc: "चेहरे के भावों को पहचानना और उन्हें भावनाओं से मिलाना सीखें।",
+                ages_3_7: "आयु 3-7",
+                social_skills: "सामाजिक कौशल",
+                situation_station: "स्थिति स्टेशन",
+                situation_station_desc: "विभिन्न परिस्थितियों के लिए उपयुक्त भावनात्मक प्रतिक्रियाओं को समझें।",
+                ages_6_10: "आयु 6-10",
+                social_understanding: "सामाजिक समझ",
+                sensory_art_studio: "संवेदी कला स्टूडियो",
+                sensory_art_studio_desc: "शांत करने वाली ध्वनियों और दृश्य प्रभावों के साथ रचनात्मक डिजिटल कला स्टूडियो।",
+                all_ages: "सभी आयु",
+                self_expression: "स्व-अभिव्यक्ति",
+                doodle_world: "डूडल वर्ल्ड",
+                doodle_world_desc: "मजेदार चित्र और दृश्य बनाने के लिए निर्देशित ड्राइंग गतिविधियों का पालन करें।",
+                ages_4_plus: "आयु 4+",
+                fine_motor: "फाइन मोटर",
+                word_builder: "वर्ड बिल्डर",
+                word_builder_desc: "दृश्य और ऑडियो समर्थन के साथ अक्षरों से शब्द बनाएँ।",
+                ages_5_9: "आयु 5-9",
+                literacy: "साक्षरता",
+                story_maker: "कहानी निर्माता",
+                story_maker_desc: "पात्रों, सेटिंग्स और कार्यों का चयन करके दृश्य कहानियाँ बनाएँ।",
+                ages_6_plus: "आयु 6+",
+                narrative_skills: "कथन कौशल",
+                bubble_pop: "बबल पॉप",
+                bubble_pop_desc: "सटीक गतिविधियों और समय का अभ्यास करने के लिए वर्चुअल बुलबुले फोड़ें।",
+                ages_3_plus: "आयु 3+",
+                shape_sorter: "आकार सॉर्टर",
+                shape_sorter_desc: "बढ़ती कठिनाई के साथ आकृतियों को मिलान करने वाली रूपरेखाओं में खींचें और छोड़ें।",
+                spatial_skills: "स्थानिक कौशल",
+                about_us: "हमारे बारे में",
+                our_mission: "हमारा मिशन",
+                contact: "संपर्क",
+                support: "समर्थन",
+                for_parents: "माता-पिता के लिए",
+                for_educators: "शिक्षकों के लिए",
+                research: "अनुसंधान",
+                blog: "ब्लॉग",
+                activities: "गतिविधियाँ",
+                learning_modules: "शिक्षा मॉड्यूल",
+                communication_tools: "संचार उपकरण",
+                connect: "जुड़ें",
+                community_forum: "समुदाय मंच",
+                events: "आयोजन",
+                newsletter: "न्यूज़लेटर",
+                feedback: "प्रतिक्रिया",
+                copyright: "© 2025 न्यूरोस्टार्स। सर्वाधिकार सुरक्षित।"
+            },
+            telugu: {
+                neurostars: "న్యూరోస్టార్స్",
+                login_register: "లాగిన్ / రిజిస్టర్",
+                home: "హోమ్",
+                games: "గేమ్స్",
+                learning: "లెర్నింగ్",
+                assignments: "అసైన్మెంట్లు",
+                resources: "వనరులు",
+                community: "సమాజం",
+                games_activities: "గేమ్స్ & యాక్టివిటీస్",
+                games_activities_desc: "న్యూరోడైవర్జెంట్ పిల్లల కోసం ప్రత్యేకంగా రూపొందించిన ఆహ్లాదకరమైన, ఇంటరాక్టివ్ గేమ్స్, ఇవి లెర్నింగ్ మరియు అభివృద్ధిని సమర్థిస్తాయి.",
+                all_games: "అన్ని గేమ్స్",
+                puzzles: "పజిల్స్",
+                emotions: "భావోద్వేగాలు",
+                art_creativity: "ఆర్ట్ & క్రియేటివిటీ",
+                language: "భాష",
+                motor_skills: "మోటార్ నైపుణ్యాలు",
+                pattern_matching: "ప్యాటర్న్ మ్యాచింగ్",
+                pattern_matching_desc: "రంగు, ఆకారం మరియు పరిమాణం ఆధారంగా నమూనాలను సరిపోల్చండి, ఇవి క్రమంగా సవాలుగా మారుతాయి.",
+                ages_4_8: "వయస్సు 4-8",
+                visual_skills: "విజువల్ నైపుణ్యాలు",
+                play_now: "ఇప్పుడు ఆడండి",
+                memory_tiles: "మెమరీ టైల్స్",
+                memory_tiles_desc: "ఈ మెమరీ-వృద్ధి గేమ్‌లో టైల్స్‌ను తిప్పండి మరియు జతలను కనుగొనండి.",
+                ages_5_plus: "వయస్సు 5+",
+                memory: "మెమరీ",
+                emotion_explorer: "ఎమోషన్ ఎక్స్‌ప్లోరర్",
+                emotion_explorer_desc: "ముఖ కవళికలను గుర్తించడం మరియు వాటిని భావోద్వేగాలతో సరిపోల్చడం నేర్చుకోండి.",
+                ages_3_7: "వయస్సు 3-7",
+                social_skills: "సామాజిక నైపుణ్యాలు",
+                situation_station: "సిట్యుయేషన్ స్టేషన్",
+                situation_station_desc: "వివిధ పరిస్థితులకు తగిన భావోద్వేగ స్పందనలను అర్థం చేసుకోండి.",
+                ages_6_10: "వయస్సు 6-10",
+                social_understanding: "సామాజిక అవగాహన",
+                sensory_art_studio: "సెన్సరీ ఆర్ట్ స్టూడియో",
+                sensory_art_studio_desc: "శాంతించే శబ్దాలు మరియు విజువల్ ఎఫెక్ట్‌లతో కూడిన సృజనాత్మక డిజిటల్ ఆర్ట్ స్టూడియో.",
+                all_ages: "అన్ని వయస్సులు",
+                self_expression: "స్వీయ-వ్యక్తీకరణ",
+                doodle_world: "డూడిల్ వరల్డ్",
+                doodle_world_desc: "సరదా చిత్రాలు మరియు దృశ్యాలను సృష్టించడానికి మార్గదర్శక డ్రాయింగ్ యాక్టివిటీస్‌ను అనుసరించండి.",
+                ages_4_plus: "వయస్సు 4+",
+                fine_motor: "ఫైన్ మోటార్",
+                word_builder: "వర్డ్ బిల్డర్",
+                word_builder_desc: "విజువల్ మరియు ఆడియో సపోర్ట్‌తో అక్షరాల నుండి పదాలను సృష్టించండి.",
+                ages_5_9: "వయస్సు 5-9",
+                literacy: "సాక్షరత",
+                story_maker: "స్టోరీ మేకర్",
+                story_maker_desc: "పాత్రలు, సెట్టింగ్‌లు మరియు చర్యలను ఎంచుకోవడం ద్వారా విజువల్ స్టోరీలను సృష్టించండి.",
+                ages_6_plus: "వయస్సు 6+",
+                narrative_skills: "కథన నైపుణ్యాలు",
+                bubble_pop: "బబుల్ పాప్",
+                bubble_pop_desc: "ఖచ్చితమైన కదలికలు మరియు టైమింగ్‌ను ప్రాక్టీస్ చేయడానికి వర్చువల్ బుడగలను పేల్చండి.",
+                ages_3_plus: "వయస్సు 3+",
+                shape_sorter: "షేప్ సార్టర్",
+                shape_sorter_desc: "పెరుగుతున్న కష్టంతో ఆకృతులను సరిపోలే అవుట్‌లైన్‌లలోకి లాగి వదలండి.",
+                spatial_skills: "స్పేషియల్ నైపుణ్యాలు",
+                about_us: "మా గురించి",
+                our_mission: "మా మిషన్",
+                contact: "సంప్రదించండి",
+                support: "మద్దతు",
+                for_parents: "తల్లిదండ్రుల కోసం",
+                for_educators: "ఎడ్యుకేటర్స్ కోసం",
+                research: "పరిశోధన",
+                blog: "బ్లాగ్",
+                activities: "కార్యకలాపాలు",
+                learning_modules: "లెర్నింగ్ మాడ్యూల్స్",
+                communication_tools: "కమ్యూనికేషన్ టూల్స్",
+                connect: "కనెక్ట్",
+                community_forum: "కమ్యూనిటీ ఫోరమ్",
+                events: "ఈవెంట్స్",
+                newsletter: "న్యూస్‌లెటర్",
+                feedback: "ఫీడ్‌బ్యాక్",
+                copyright: "© 2025 న్యూరోస్టార్స్. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి."
+            }
+        };
+
+        // Initialize language
+        let currentLanguage = localStorage.getItem('language') || 'english';
+        document.getElementById('current-language').textContent = translations[currentLanguage].neurostars.split(' ')[0];
+
+        // Update text based on selected language
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            document.getElementById('current-language').textContent = translations[lang].neurostars.split(' ')[0];
+
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                element.textContent = translations[lang][key];
+            });
+
+            // Update title
+            document.querySelector('title').textContent = translations[lang].games_activities_title;
+        }
+
+        // Language selector
+        const languageBtn = document.getElementById('language-btn');
+        const languageDropdown = document.getElementById('language-dropdown');
+        const languageOptions = document.querySelectorAll('.language-option');
+
+        languageBtn.addEventListener('click', () => {
+            languageDropdown.classList.toggle('active');
+        });
+
+        languageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                updateLanguage(lang);
+                languageDropdown.classList.remove('active');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+                languageDropdown.classList.remove('active');
+            }
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+
+        // Category filter
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const gameCards = document.querySelectorAll('.game-card');
+
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const category = tab.getAttribute('data-category');
+                gameCards.forEach(card => {
+                    const categories = card.getAttribute('data-categories').split(' ');
+                    card.style.display = category === 'all' || categories.includes(category) ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Game loading (placeholder)
+        function loadGame(gameId) {
+            const gameContainer = document.getElementById('game-container');
+            const gameTitle = document.getElementById('game-title');
+            const gameContent = document.getElementById('game-content');
+
+            gameTitle.textContent = translations[currentLanguage][gameId.replace(/-/g, '_')];
+            gameContent.innerHTML = `<p>Loading ${gameTitle.textContent}...</p>`;
+            gameContainer.classList.remove('hidden');
+        }
+
+        function closeGame() {
+            document.getElementById('game-container').classList.add('hidden');
+            document.getElementById('game-content').innerHTML = '';
+        }
+
+        // Initialize language on page load
+        updateLanguage(currentLanguage);
+    </script>
 </body>
 </html>
